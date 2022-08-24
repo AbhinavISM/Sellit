@@ -21,14 +21,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.UploadTask;
-
 import java.util.List;
 
 
@@ -197,31 +189,36 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
                 propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getProperty_ID_paticular());
         NavDirections action = PropertyFragmentDirections.actionPropertyFragmentToEditFragment(tosendforedit);
         navController.navigate(action);
+
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==3&&data!=null){
-            profile_image_uri = data.getData();
+            propertyFragmentViewModel.change_profile_pic(data.getData(),System.currentTimeMillis()+"."+getExtension(data.getData()));
+//            profile_image_uri = data.getData();
 //            ProfileImage.setImageURI(profile_image_uri);
-            String image_name = System.currentTimeMillis()+"."+getExtension(profile_image_uri);
-            FirebaseStorage.getInstance().getReference("profile_pics").child(image_name).putFile(profile_image_uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    if(task.isSuccessful()){
-                        FirebaseStorage.getInstance().getReference("profile_pics").child(image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profile_pic_link").setValue(uri.toString());
-                                Toast.makeText(getContext(), "succesfully changed", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }
-            });
+//            String image_name = System.currentTimeMillis()+"."+getExtension(profile_image_uri);
+//            FirebaseStorage.getInstance().getReference("profile_pics").child(image_name).putFile(profile_image_uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+//                    if(task.isSuccessful()){
+//                        FirebaseStorage.getInstance().getReference("profile_pics").child(image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                            @Override
+//                            public void onSuccess(Uri uri) {
+//                                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profile_pic_link").setValue(uri.toString());
+//                                Toast.makeText(getContext(), "succesfully changed", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//                    }
+//                }
+//            });
+
+
         }
     }
+
     String getExtension(Uri Auri){
         ContentResolver cr = getActivity().getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();

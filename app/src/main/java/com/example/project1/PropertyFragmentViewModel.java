@@ -1,5 +1,7 @@
 package com.example.project1;
 
+import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -36,4 +38,9 @@ public class PropertyFragmentViewModel extends ViewModel implements Propertydata
             return false;
         }
     }
+
+    public void change_profile_pic(Uri profile_image_uri, String image_name){
+        propertyFragmentRepository.change_profile_pic_repo(profile_image_uri,image_name);
+    }
+
 }
