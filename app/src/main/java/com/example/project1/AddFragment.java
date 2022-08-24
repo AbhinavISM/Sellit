@@ -28,8 +28,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
-
 public class AddFragment extends Fragment {
+
+    //sadhgurbtuyverbo
+
     Uri image_uri;
     ImageView addimage;
 
