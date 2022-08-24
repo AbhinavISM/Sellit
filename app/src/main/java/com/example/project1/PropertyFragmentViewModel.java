@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.List;
 
 public class PropertyFragmentViewModel extends ViewModel implements Propertydataloadlistener{
@@ -23,5 +25,15 @@ public class PropertyFragmentViewModel extends ViewModel implements Propertydata
     @Override
     public void onPropertydataloaded(List<hetero_model_for_userprofile> fullyloadeddata) {
         property_data_list_vm.setValue(fullyloadeddata);
+    }
+
+    public boolean logout_user(){
+        FirebaseAuth.getInstance().signOut();
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

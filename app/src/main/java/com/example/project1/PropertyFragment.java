@@ -158,8 +158,8 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
 
     @Override
     public void logout_profile_pic_method() {
-        FirebaseAuth.getInstance().signOut();
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+        boolean logout_successful = propertyFragmentViewModel.logout_user();
+        if (logout_successful) {
             Toast.makeText(getContext(),"logged out succesfully",Toast.LENGTH_LONG).show();
             startActivity(new Intent(getActivity(),login.class));
             getActivity().finish();
