@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -49,6 +51,7 @@ public class EditFragment extends Fragment {
     Button update_button;
     Button delete_button;
 
+    PropertyFragmentViewModel propertyFragmentViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,17 +72,24 @@ public class EditFragment extends Fragment {
         delete_button = getView().findViewById(R.id.deletebutton_fragment);
 
         NavController navController = Navigation.findNavController(view);
-        property_model_class recieved_data = EditFragmentArgs.fromBundle(getArguments()).getDataForEditFragment();
+//        property_model_class recieved_data = EditFragmentArgs.fromBundle(getArguments()).getDataForEditFragment();
 
-        edit_phoneno.setText(recieved_data.getPhone_number());
-        edit_adress.setText(recieved_data.getAdress());
-        edit_price.setText(recieved_data.getPrice());
-        edit_details.setText(recieved_data.getDetails());
-        offered_by = recieved_data.getOfferedby();
-        edit_image_uri = null;
-        image_url = recieved_data.getProperty_image();
-        property_ID = recieved_data.getProperty_ID();
-        property_ID_particular = recieved_data.getProperty_ID_particular();
+        propertyFragmentViewModel = new ViewModelProvider(getActivity()).get(PropertyFragmentViewModel.class);
+        propertyFragmentViewModel.getDataForPropertyFragmentToEditFragment().observe(getActivity(), new Observer<property_model_class>() {
+            @Override
+            public void onChanged(property_model_class recieved_data) {
+                edit_phoneno.setText(recieved_data.getPhone_number());
+                edit_adress.setText(recieved_data.getAdress());
+                edit_price.setText(recieved_data.getPrice());
+                edit_details.setText(recieved_data.getDetails());
+                offered_by = recieved_data.getOfferedby();
+                edit_image_uri = null;
+                image_url = recieved_data.getProperty_image();
+                property_ID = recieved_data.getProperty_ID();
+                property_ID_particular = recieved_data.getProperty_ID_particular();
+            }
+        });
+
 
         edit_Image.setOnClickListener(new View.OnClickListener() {
             @Override

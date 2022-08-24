@@ -29,9 +29,5 @@
         android:id="@+id/editFragment"
         android:name="com.example.project1.EditFragment"
         android:label="fragment_edit"
-        tools:layout="@layout/fragment_edit" >
-        <argument
-            android:name="data_for_edit_fragment"
-            app:argType="com.example.project1.property_model_class" />
-    </fragment>
+        tools:layout="@layout/fragment_edit" />
 </navigation>
