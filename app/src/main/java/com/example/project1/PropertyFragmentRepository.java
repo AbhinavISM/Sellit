@@ -24,15 +24,13 @@ public class PropertyFragmentRepository {
     MutableLiveData<List<hetero_model_for_userprofile>> property_live_data_list_repo;
     List<hetero_model_for_userprofile> property_data_list_repo;
     public static PropertyFragmentRepository instance;
-    static PropertyFragment pcontext;
     static Propertydataloadlistener propertydataloadlistener;
 
-    public static PropertyFragmentRepository getInstance(PropertyFragment context){
-        pcontext = context;
+    public static PropertyFragmentRepository getInstance(Propertydataloadlistener context){
+        propertydataloadlistener = context;
         if(instance==null){
             instance = new PropertyFragmentRepository();
         }
-//        propertydataloadlistener = (Propertydataloadlistener) pcontext;
         return instance;
     }
 
@@ -73,7 +71,7 @@ public class PropertyFragmentRepository {
                                                         property_model_class property_model_data = dataSnapshot.getValue(property_model_class.class);
                                                         property_data_list_repo.add(new hetero_model_for_userprofile(property_model_data.getPhone_number(),property_model_data.getAdress(),property_model_data.getPrice(),property_model_data.getDetails(),property_model_data.getOfferedby(),property_model_data.getProperty_image(),property_model_data.getProperty_ID(),property_model_data.getProperty_ID_particular()));
                                                     }
-//                                                    propertydataloadlistener.onPropertydataloaded();
+                                                    propertydataloadlistener.onPropertydataloaded(property_data_list_repo);
                                                 }
 
                                                 @Override

@@ -16,15 +16,13 @@ public class HomeFragmentRepository {
     private List<property_model_class> home_data_list_repo;
     private MutableLiveData<List<property_model_class>> home_live_data_list_repo;
     public static HomeFragmentRepository instance;
-    static HomeFragment hcontext;
     static Homedataloadlistener homedataloadlistener;
 
-    public static HomeFragmentRepository getInstance(HomeFragment context){
-        hcontext = context;
+    public static HomeFragmentRepository getInstance(Homedataloadlistener context){
+        homedataloadlistener = context;
         if(instance==null){
             instance =  new HomeFragmentRepository();
         }
-//        homedataloadlistener = (Homedataloadlistener) hcontext;
         return instance;
     }
 
@@ -38,7 +36,7 @@ public class HomeFragmentRepository {
                     property_model_class property_model_data = dataSnapshot.getValue(property_model_class.class);
                     home_data_list_repo.add(property_model_data);
                 }
-//                homedataloadlistener.onHomedataloaded();
+                homedataloadlistener.onHomedataloaded(home_data_list_repo);
             }
 
             @Override

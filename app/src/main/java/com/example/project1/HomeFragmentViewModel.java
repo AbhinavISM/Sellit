@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-public class HomeFragmentViewModel extends ViewModel {
+public class HomeFragmentViewModel extends ViewModel implements Homedataloadlistener {
 
     private MutableLiveData<List<property_model_class>> home_data_list_vm;
     private HomeFragmentRepository homeFragmentRepository;
@@ -15,11 +15,15 @@ public class HomeFragmentViewModel extends ViewModel {
         return home_data_list_vm;
     }
 
-    public void initHomeFragmentViewModel(HomeFragment fragment_context) {
+    public void initHomeFragmentViewModel() {
         if (home_data_list_vm == null) {
-            homeFragmentRepository = HomeFragmentRepository.getInstance(fragment_context);
+            homeFragmentRepository = HomeFragmentRepository.getInstance(this);
             home_data_list_vm = homeFragmentRepository.getHome_data_list_repo();
         }
     }
 
+    @Override
+    public void onHomedataloaded(List<property_model_class> fullyloadeddata) {
+        home_data_list_vm.setValue(fullyloadeddata);
+    }
 }

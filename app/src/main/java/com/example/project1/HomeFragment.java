@@ -35,14 +35,15 @@ public class HomeFragment extends Fragment implements recyclerInterface{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         homeFragmentViewModel = new ViewModelProvider(this).get(HomeFragmentViewModel.class);
-        homeFragmentViewModel.initHomeFragmentViewModel(this);
+        homeFragmentViewModel.initHomeFragmentViewModel();
+        init_home_recycler();
         homeFragmentViewModel.get_home_data_list_vm().observe( getActivity(), new Observer<List<property_model_class>>() {
             @Override
             public void onChanged(List<property_model_class> property_model_classes) {
                 home_recycler_adapter.notifyDataSetChanged();
             }
         });
-        init_home_recycler();
+
     }
 
     void init_home_recycler() {

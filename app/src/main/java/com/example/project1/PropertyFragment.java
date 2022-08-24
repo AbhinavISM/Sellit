@@ -52,7 +52,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         propertyFragmentViewModel = new ViewModelProvider(this).get(PropertyFragmentViewModel.class);
-        propertyFragmentViewModel.initPropertyFragmentViewModel(this);
+        propertyFragmentViewModel.initPropertyFragmentViewModel();
         init_hetero_fragment_recycler();
         propertyFragmentViewModel.get_property_data_list_vm().observe(getActivity(), new Observer<List<hetero_model_for_userprofile>>() {
             @Override
@@ -187,7 +187,14 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
 //        startActivity(edit_prop_intent);
 
         NavController navController = Navigation.findNavController(getView());
-        property_model_class tosendforedit = new property_model_class(heteromodel.get(position).getPhone_number(),heteromodel.get(position).getAdress(),heteromodel.get(position).getPrice(),heteromodel.get(position).getDetails(),heteromodel.get(position).getOfferedby(),heteromodel.get(position).getProperty_image(),heteromodel.get(position).getProperty_ID(),heteromodel.get(position).getProperty_ID_paticular());
+        property_model_class tosendforedit = new property_model_class(propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getPhone_number(),
+                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getAdress(),
+                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getPrice(),
+                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getDetails(),
+                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getOfferedby(),
+                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getProperty_image(),
+                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getProperty_ID(),
+                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getProperty_ID_paticular());
         NavDirections action = PropertyFragmentDirections.actionPropertyFragmentToEditFragment(tosendforedit);
         navController.navigate(action);
     }
