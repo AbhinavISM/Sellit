@@ -11,11 +11,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.List;
 
 public class PropertyFragmentViewModel extends ViewModel implements Propertydataloadlistener{
-    private MutableLiveData<List<hetero_model_for_userprofile>> property_data_list_vm;
+    private MutableLiveData<List<Hetero_model_for_userprofile>> property_data_list_vm;
     private PropertyFragmentRepository propertyFragmentRepository;
     private MutableLiveData<Property_model_class> tosendforedit_mutable_live;
 
-    public LiveData<List<hetero_model_for_userprofile>> get_property_data_list_vm(){
+    public LiveData<List<Hetero_model_for_userprofile>> get_property_data_list_vm(){
         return property_data_list_vm;
     }
     public void initPropertyFragmentViewModel(){
@@ -26,7 +26,7 @@ public class PropertyFragmentViewModel extends ViewModel implements Propertydata
     }
 
     @Override
-    public void onPropertydataloaded(List<hetero_model_for_userprofile> fullyloadeddata) {
+    public void onPropertydataloaded(List<Hetero_model_for_userprofile> fullyloadeddata) {
         property_data_list_vm.setValue(fullyloadeddata);
     }
 

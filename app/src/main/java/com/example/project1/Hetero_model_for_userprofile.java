@@ -1,6 +1,6 @@
 package com.example.project1;
 
-public class hetero_model_for_userprofile {
+public class Hetero_model_for_userprofile {
     public static final int user_profile_case = 1;
     public static final int user_property_case = 2;
 
@@ -38,10 +38,10 @@ public class hetero_model_for_userprofile {
     private String Profile_useremail_fromirebase;
     private String Profile_image;
 
-    public hetero_model_for_userprofile(){
+    public Hetero_model_for_userprofile(){
 
     }
-    public hetero_model_for_userprofile(int viewtype, String profile_username_fromfirebase, String profile_useremail_fromirebase, String profile_image){
+    public Hetero_model_for_userprofile(int viewtype, String profile_username_fromfirebase, String profile_useremail_fromirebase, String profile_image){
         Profile_username_fromfirebase = profile_username_fromfirebase;
         Profile_useremail_fromirebase = profile_useremail_fromirebase;
         Profile_image= profile_image;
@@ -80,7 +80,7 @@ public class hetero_model_for_userprofile {
         Profile_image = profile_image;
     }
 
-    public hetero_model_for_userprofile( String phone_number, String adress, String price, String details, String offeredby, String property_image, String property_ID, String property_ID_paticular) {
+    public Hetero_model_for_userprofile(String phone_number, String adress, String price, String details, String offeredby, String property_image, String property_ID, String property_ID_paticular) {
         Phone_number = phone_number;
         Adress = adress;
         Price = price;

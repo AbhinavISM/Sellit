@@ -1,91 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/color1"
-    android:layout_margin="8dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="profile_username"
+            type="String" />
 
+        <variable
+            name="profile_email"
+            type="String" />
+
+        <variable
+            name="profile_image_url"
+            type="String" />
+    </data>
 
     <LinearLayout
-        android:layout_width="250dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PROFILE : "
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp"
-            android:textColor="@color/black" />
+        android:background="@color/color1"
+        android:layout_margin="8dp">
+
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name : "
-            android:id="@+id/profile_username"
-            android:textSize="24dp"
-            />
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="username"
-                android:id="@+id/profile_username_fromfirebase"
-                android:textSize="24dp"
-                />
-        </LinearLayout>
+                android:text="PROFILE : "
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/black" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name : "
+                    android:id="@+id/profile_username"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{profile_username}"
+                    android:id="@+id/profile_username_fromfirebase"
+                    android:textSize="24dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Email : "
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{profile_email}"
+                    android:textSize="24dp"
+                    android:id="@+id/profile_useremail_fromfirebase"
+                    android:layout_marginTop="16dp" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Email : "
-                android:textSize="24dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="useremail"
-                android:textSize="24dp"
-                android:id="@+id/profile_useremail_fromfirebase"
-                android:layout_marginTop="16dp"/>
+                android:text="your property :"
+                android:textSize="16dp"
+                android:textColor="@color/black"
+                android:textAllCaps="true"
+                android:textStyle="italic" />
         </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="your property :"
-            android:textSize="16dp"
-            android:textColor="@color/black"
-            android:textAllCaps="true"
-            android:textStyle="italic"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        tools:srcCompat="@tools:sample/avatars"/>
-    </LinearLayout>
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:loadProfilePhoto="@{profile_image_url}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                tools:srcCompat="@tools:sample/avatars" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

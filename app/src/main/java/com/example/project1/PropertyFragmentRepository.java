@@ -1,6 +1,6 @@
 package com.example.project1;
 
-import static com.example.project1.hetero_model_for_userprofile.user_profile_case;
+import static com.example.project1.Hetero_model_for_userprofile.user_profile_case;
 
 import android.net.Uri;
 import android.util.Log;
@@ -25,8 +25,8 @@ import java.util.Objects;
 
 public class PropertyFragmentRepository {
 
-    MutableLiveData<List<hetero_model_for_userprofile>> property_live_data_list_repo;
-    List<hetero_model_for_userprofile> property_data_list_repo;
+    MutableLiveData<List<Hetero_model_for_userprofile>> property_live_data_list_repo;
+    List<Hetero_model_for_userprofile> property_data_list_repo;
     public static PropertyFragmentRepository instance;
     static Propertydataloadlistener propertydataloadlistener;
 
@@ -38,7 +38,7 @@ public class PropertyFragmentRepository {
         return instance;
     }
 
-    public MutableLiveData<List<hetero_model_for_userprofile>> getProperty_data_list_repo(){
+    public MutableLiveData<List<Hetero_model_for_userprofile>> getProperty_data_list_repo(){
         property_data_list_repo = new ArrayList<>();
 
         final String[] username = new String[1];
@@ -70,10 +70,10 @@ public class PropertyFragmentRepository {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     property_data_list_repo.clear();
-                                                    property_data_list_repo.add(new hetero_model_for_userprofile(user_profile_case,username[0],useremail[0],user_profile_link[0]));
+                                                    property_data_list_repo.add(new Hetero_model_for_userprofile(user_profile_case,username[0],useremail[0],user_profile_link[0]));
                                                     for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
                                                         Property_model_class property_model_data = dataSnapshot.getValue(Property_model_class.class);
-                                                        property_data_list_repo.add(new hetero_model_for_userprofile(property_model_data.getPhone_number(),property_model_data.getAdress(),property_model_data.getPrice(),property_model_data.getDetails(),property_model_data.getOfferedby(),property_model_data.getProperty_image(),property_model_data.getProperty_ID(),property_model_data.getProperty_ID_particular()));
+                                                        property_data_list_repo.add(new Hetero_model_for_userprofile(property_model_data.getPhone_number(),property_model_data.getAdress(),property_model_data.getPrice(),property_model_data.getDetails(),property_model_data.getOfferedby(),property_model_data.getProperty_image(),property_model_data.getProperty_ID(),property_model_data.getProperty_ID_particular()));
                                                     }
                                                     propertydataloadlistener.onPropertydataloaded(property_data_list_repo);
                                                 }

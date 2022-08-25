@@ -63,7 +63,6 @@ public class property_adapter extends RecyclerView.Adapter<property_adapter.View
         public ViewHolder(@NonNull PropertyLayoutBinding propertyLayoutBinding) {
             super(propertyLayoutBinding.getRoot());
             this.propertyLayoutBinding = propertyLayoutBinding;
-
             propertyLayoutBinding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

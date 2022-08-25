@@ -1,7 +1,7 @@
 package com.example.project1;
 
-import static com.example.project1.hetero_model_for_userprofile.user_profile_case;
-import static com.example.project1.hetero_model_for_userprofile.user_property_case;
+import static com.example.project1.Hetero_model_for_userprofile.user_profile_case;
+import static com.example.project1.Hetero_model_for_userprofile.user_property_case;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,20 +9,19 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
+import com.example.project1.databinding.PropertyLayoutBinding;
+import com.example.project1.databinding.UserProfileBinding;
 
 import java.util.List;
 
 public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
 
-    List<hetero_model_for_userprofile> hetero_list;
+    List<Hetero_model_for_userprofile> hetero_list;
     Context context;
     recyclerInterface recycler_interafce_for_profile;
     add_profile_pic_interface profile_pic_interface;
@@ -32,7 +31,7 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
         return hetero_list.get(position).getViewtype();
     }
 
-    public hetero_adapter_for_userprofile(List<hetero_model_for_userprofile> hetero_list, Context context,recyclerInterface reycler_interafce_for_profile,add_profile_pic_interface profile_pic_interface) {
+    public hetero_adapter_for_userprofile(List<Hetero_model_for_userprofile> hetero_list, Context context, recyclerInterface reycler_interafce_for_profile, add_profile_pic_interface profile_pic_interface) {
         this.hetero_list = hetero_list;
         this.context = context;
         this.recycler_interafce_for_profile = reycler_interafce_for_profile;
@@ -44,11 +43,13 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch(viewType){
             case user_profile_case:
-                View profileview= LayoutInflater.from(context).inflate(R.layout.user_profile,parent,false);
-                return new user_profile_case_ViewHolder(profileview);
+                LayoutInflater layoutInflater1 = LayoutInflater.from(context);
+                UserProfileBinding userProfileBinding = UserProfileBinding.inflate(layoutInflater1,parent,false);
+                return new user_profile_case_ViewHolder(userProfileBinding);
             case user_property_case:
-                View propertyview= LayoutInflater.from(context).inflate(R.layout.property_layout,parent,false);
-                return new user_property_case_ViewHolder(propertyview);
+                LayoutInflater layoutInflater2 = LayoutInflater.from(context);
+                PropertyLayoutBinding propertyLayoutBinding1 = PropertyLayoutBinding.inflate(layoutInflater2,parent,false);
+                return new user_property_case_ViewHolder(propertyLayoutBinding1);
             default:
                 return null;
         }
@@ -61,7 +62,9 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
                 String profile_image_data = hetero_list.get(position).getProfile_image();
                 String profile_username_fromfirebase_data = hetero_list.get(position).getProfile_username_fromfirebase();
                 String profile_useremail_fromfirebase_data = hetero_list.get(position).getProfile_useremail_fromirebase();
-                ((user_profile_case_ViewHolder)holder).setdata1(profile_image_data,profile_username_fromfirebase_data,profile_useremail_fromfirebase_data);
+                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileImageUrl(profile_image_data);
+                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileEmail(profile_useremail_fromfirebase_data);
+                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileUsername(profile_username_fromfirebase_data);
                 break;
             case user_property_case:
                 String adressdata = hetero_list.get(position).getAdress();
@@ -71,7 +74,8 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
                 String detailsdata = hetero_list.get(position).getDetails();
                 String offerdbydata = hetero_list.get(position).getOfferedby();
                 String imagedata = hetero_list.get(position).getProperty_image();
-                ((user_property_case_ViewHolder)holder).setdata2(adressdata, phnodata, pricedata, detailsdata, offerdbydata,imagedata);
+                ((user_property_case_ViewHolder)holder).propertyLayoutBinding1.setPropertyModelClassData(
+                        new Property_model_class(phnodata, adressdata,pricedata,detailsdata,offerdbydata,imagedata,"dummy", "dummy"));
                 break;
         }
     }
@@ -82,15 +86,11 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
     }
 
      class user_profile_case_ViewHolder extends RecyclerView.ViewHolder{
-        ImageView profile_image;
-        TextView profile_username_fromfirebase;
-        TextView profile_useremail_fromfirebase;
-        public user_profile_case_ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            profile_image = itemView.findViewById(R.id.profile_image);
-            profile_username_fromfirebase = itemView.findViewById(R.id.profile_username_fromfirebase);
-            profile_useremail_fromfirebase = itemView.findViewById(R.id.profile_useremail_fromfirebase);
-            profile_image.setOnClickListener(new View.OnClickListener() {
+        UserProfileBinding userProfileBinding;
+        public user_profile_case_ViewHolder(@NonNull UserProfileBinding userProfileBinding) {
+            super(userProfileBinding.getRoot());
+            this.userProfileBinding = userProfileBinding;
+            userProfileBinding.profileImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     showPopupMenu(view);
@@ -116,48 +116,20 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
                 }
             });
         }
-
-        public void setdata1(String profile_image_data, String profile_username_fromfirebase_data, String profile_useremail_fromfirebase_data){
-            profile_username_fromfirebase.setText(profile_username_fromfirebase_data);
-            profile_useremail_fromfirebase.setText(profile_useremail_fromfirebase_data);
-            Picasso.get().load(profile_image_data).into(profile_image);
-        }
     }
 
     class user_property_case_ViewHolder extends RecyclerView.ViewHolder{
-        ImageView property_image;
-        TextView phone_number;
-        TextView adress;
-        TextView price;
-        TextView details;
-        TextView offeredby;
+        PropertyLayoutBinding propertyLayoutBinding1;
 
-        public user_property_case_ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            property_image = itemView.findViewById(R.id.property_image);
-            adress = itemView.findViewById(R.id.adress);
-            phone_number = itemView.findViewById(R.id.phone_number);
-            price = itemView.findViewById(R.id.price);
-            details = itemView.findViewById(R.id.details);
-            offeredby = itemView.findViewById(R.id.offered_by);
+        public user_property_case_ViewHolder(@NonNull PropertyLayoutBinding propertyLayoutBinding1) {
+            super(propertyLayoutBinding1.getRoot());
+            this.propertyLayoutBinding1 = propertyLayoutBinding1;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     recycler_interafce_for_profile.onItemClick(getAdapterPosition());
                 }
             });
-        }
-
-        private void setdata2( String adressdata, String phnodata, String pricedata, String detailsdata, String offerdbydata, String imagedata){
-            adress.setText(adressdata);
-            phone_number.setText(phnodata);
-            price.setText(pricedata);
-            details.setText(detailsdata);
-            offeredby.setText(offerdbydata);
-            Log.d("image url",imagedata);
-            Picasso.get().load(imagedata).into(property_image);
-//            property_image.setImageResource(imagedata);
-//            Glide.with(context).load(imagedata).into(property_image);
         }
     }
 

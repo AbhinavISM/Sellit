@@ -1,6 +1,6 @@
 package com.example.project1;
 
-import static com.example.project1.hetero_model_for_userprofile.user_profile_case;
+import static com.example.project1.Hetero_model_for_userprofile.user_profile_case;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -34,7 +34,7 @@ import java.util.Objects;
 public class this_user extends AppCompatActivity implements recyclerInterface, add_profile_pic_interface {
     RecyclerView heterorecyclerView;
     hetero_adapter_for_userprofile heteroadapter;
-    List<hetero_model_for_userprofile> heteromodel;
+    List<Hetero_model_for_userprofile> heteromodel;
     LinearLayoutManager heterolayoutManager;
 //    ImageView ProfileImage;
     Uri profile_image_uri;
@@ -78,10 +78,10 @@ public class this_user extends AppCompatActivity implements recyclerInterface, a
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     heteromodel.clear();
-                                                    heteromodel.add(new hetero_model_for_userprofile(user_profile_case,username[0],useremail[0],user_profile_link[0]));
+                                                    heteromodel.add(new Hetero_model_for_userprofile(user_profile_case,username[0],useremail[0],user_profile_link[0]));
                                                     for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
                                                         Property_model_class property_model_data = dataSnapshot.getValue(Property_model_class.class);
-                                                        heteromodel.add(new hetero_model_for_userprofile(property_model_data.getPhone_number(),property_model_data.getAdress(),property_model_data.getPrice(),property_model_data.getDetails(),property_model_data.getOfferedby(),property_model_data.getProperty_image(),property_model_data.getProperty_ID(),property_model_data.getProperty_ID_particular()));
+                                                        heteromodel.add(new Hetero_model_for_userprofile(property_model_data.getPhone_number(),property_model_data.getAdress(),property_model_data.getPrice(),property_model_data.getDetails(),property_model_data.getOfferedby(),property_model_data.getProperty_image(),property_model_data.getProperty_ID(),property_model_data.getProperty_ID_particular()));
                                                     }
                                                     init_hetero_recycler();
                                                 }
@@ -116,8 +116,8 @@ public class this_user extends AppCompatActivity implements recyclerInterface, a
 
 
 
-//        heteromodel.add(new hetero_model_for_userprofile(user_profile_case,"naam","naam@naam.com","https://firebasestorage.googleapis.com/v0/b/project1-2d029.appspot.com/o/uploads%2F1660458189951.jpg?alt=media&token=46e81358-0a2f-4c51-a28d-9c60a40a2053"));
-//        heteromodel.add(new hetero_model_for_userprofile("8456434648","bfgisuegy","93582","rhgsjegrs0","maine daala hain","https://firebasestorage.googleapis.com/v0/b/project1-2d029.appspot.com/o/uploads%2F1660458189951.jpg?alt=media&token=46e81358-0a2f-4c51-a28d-9c60a40a2053","NO_ID","NO_ID"));
+//        heteromodel.add(new Hetero_model_for_userprofile(user_profile_case,"naam","naam@naam.com","https://firebasestorage.googleapis.com/v0/b/project1-2d029.appspot.com/o/uploads%2F1660458189951.jpg?alt=media&token=46e81358-0a2f-4c51-a28d-9c60a40a2053"));
+//        heteromodel.add(new Hetero_model_for_userprofile("8456434648","bfgisuegy","93582","rhgsjegrs0","maine daala hain","https://firebasestorage.googleapis.com/v0/b/project1-2d029.appspot.com/o/uploads%2F1660458189951.jpg?alt=media&token=46e81358-0a2f-4c51-a28d-9c60a40a2053","NO_ID","NO_ID"));
     }
 
     private void init_hetero_recycler(){
