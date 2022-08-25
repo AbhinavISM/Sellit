@@ -88,7 +88,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
 //                                                    heteromodel.clear();
 //                                                    heteromodel.add(new hetero_model_for_userprofile(user_profile_case,username[0],useremail[0],user_profile_link[0]));
 //                                                    for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-//                                                        property_model_class property_model_data = dataSnapshot.getValue(property_model_class.class);
+//                                                        Property_model_class property_model_data = dataSnapshot.getValue(Property_model_class.class);
 //                                                        heteromodel.add(new hetero_model_for_userprofile(property_model_data.getPhone_number(),property_model_data.getAdress(),property_model_data.getPrice(),property_model_data.getDetails(),property_model_data.getOfferedby(),property_model_data.getProperty_image(),property_model_data.getProperty_ID(),property_model_data.getProperty_ID_particular()));
 //                                                    }
 //                                                    init_hetero_fragment_recycler();
@@ -180,7 +180,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
 
         NavController navController = Navigation.findNavController(getView());
         propertyFragmentViewModel.setDataForPropertyFragmentToEditFragment(position);
-//        property_model_class tosendforedit = new property_model_class(propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getPhone_number(),
+//        Property_model_class tosendforedit = new Property_model_class(propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getPhone_number(),
 //                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getAdress(),
 //                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getPrice(),
 //                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getDetails(),

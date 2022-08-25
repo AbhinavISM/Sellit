@@ -30,7 +30,7 @@ public class recycler_activity extends AppCompatActivity implements recyclerInte
 
     RecyclerView recyclerView;
     public static property_adapter adapterofprop;
-    List<property_model_class> property_list;
+    List<Property_model_class> property_list;
     LinearLayoutManager layoutManager;
 
     @Override
@@ -97,29 +97,29 @@ public class recycler_activity extends AppCompatActivity implements recyclerInte
     private void initproperty_data() {
         property_list = new ArrayList<>();
         // if i dont intialise this one item for once by myself, i dont know why my firebase data fetchin gloop below wont work
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek","https://firebasestorage.googleapis.com/v0/b/project1-2d029.appspot.com/o/uploads%2F1660458189951.jpg?alt=media&token=46e81358-0a2f-4c51-a28d-9c60a40a2053","NO_ID","NO_ID"));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek","https://firebasestorage.googleapis.com/v0/b/project1-2d029.appspot.com/o/uploads%2F1658759605827.jpg?alt=media&token=54389f6a-b0d9-4687-8adb-c0a0497951ed"));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg2));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg3));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg2));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg2));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg3));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg2));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg2));
-//        property_list.add(new property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek","https://firebasestorage.googleapis.com/v0/b/project1-2d029.appspot.com/o/uploads%2F1660458189951.jpg?alt=media&token=46e81358-0a2f-4c51-a28d-9c60a40a2053","NO_ID","NO_ID"));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek","https://firebasestorage.googleapis.com/v0/b/project1-2d029.appspot.com/o/uploads%2F1658759605827.jpg?alt=media&token=54389f6a-b0d9-4687-8adb-c0a0497951ed"));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg2));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg3));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg2));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg2));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg3));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg2));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg2));
+//        property_list.add(new Property_model_class("1234", "jaha taha", "bahut saara paisa", "bahut banhiya property hain","sab ka maalik ek",R.drawable.testimg1));
 
         FirebaseDatabase.getInstance().getReference("property added by all users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 property_list.clear();
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                    property_model_class property_model_data = dataSnapshot.getValue(property_model_class.class);
+                    Property_model_class property_model_data = dataSnapshot.getValue(Property_model_class.class);
                     property_list.add(property_model_data);
                     Log.d("run hua", "this time");
                     Log.d("hello",property_model_data.getAdress());

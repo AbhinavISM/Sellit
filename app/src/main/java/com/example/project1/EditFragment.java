@@ -72,12 +72,12 @@ public class EditFragment extends Fragment {
         delete_button = getView().findViewById(R.id.deletebutton_fragment);
 
         NavController navController = Navigation.findNavController(view);
-//        property_model_class recieved_data = EditFragmentArgs.fromBundle(getArguments()).getDataForEditFragment();
+//        Property_model_class recieved_data = EditFragmentArgs.fromBundle(getArguments()).getDataForEditFragment();
 
         propertyFragmentViewModel = new ViewModelProvider(getActivity()).get(PropertyFragmentViewModel.class);
-        propertyFragmentViewModel.getDataForPropertyFragmentToEditFragment().observe(getActivity(), new Observer<property_model_class>() {
+        propertyFragmentViewModel.getDataForPropertyFragmentToEditFragment().observe(getActivity(), new Observer<Property_model_class>() {
             @Override
-            public void onChanged(property_model_class recieved_data) {
+            public void onChanged(Property_model_class recieved_data) {
                 edit_phoneno.setText(recieved_data.getPhone_number());
                 edit_adress.setText(recieved_data.getAdress());
                 edit_price.setText(recieved_data.getPrice());

@@ -3,7 +3,7 @@ package com.example.project1;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class property_model_class implements Parcelable {
+public class Property_model_class implements Parcelable {
 
     private String Phone_number;
     private String Adress;
@@ -14,11 +14,11 @@ public class property_model_class implements Parcelable {
     private String property_ID;
     private String property_ID_particular;
 
-    public property_model_class(){
+    public Property_model_class(){
 
     }
 
-    public property_model_class(String phone_number, String adress, String price, String details, String offeredby, String property_image , String property_ID, String property_ID_particular) {
+    public Property_model_class(String phone_number, String adress, String price, String details, String offeredby, String property_image , String property_ID, String property_ID_particular) {
         Phone_number = phone_number;
         Adress = adress;
         Price = price;
@@ -29,7 +29,7 @@ public class property_model_class implements Parcelable {
         this.property_ID_particular = property_ID_particular;
     }
 
-    protected property_model_class(Parcel in) {
+    protected Property_model_class(Parcel in) {
         Phone_number = in.readString();
         Adress = in.readString();
         Price = in.readString();
@@ -40,15 +40,15 @@ public class property_model_class implements Parcelable {
         property_ID_particular = in.readString();
     }
 
-    public static final Creator<property_model_class> CREATOR = new Creator<property_model_class>() {
+    public static final Creator<Property_model_class> CREATOR = new Creator<Property_model_class>() {
         @Override
-        public property_model_class createFromParcel(Parcel in) {
-            return new property_model_class(in);
+        public Property_model_class createFromParcel(Parcel in) {
+            return new Property_model_class(in);
         }
 
         @Override
-        public property_model_class[] newArray(int size) {
-            return new property_model_class[size];
+        public Property_model_class[] newArray(int size) {
+            return new Property_model_class[size];
         }
     };
 

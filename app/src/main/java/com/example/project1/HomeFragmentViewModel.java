@@ -8,10 +8,10 @@ import java.util.List;
 
 public class HomeFragmentViewModel extends ViewModel implements Homedataloadlistener {
 
-    private MutableLiveData<List<property_model_class>> home_data_list_vm;
+    private MutableLiveData<List<Property_model_class>> home_data_list_vm;
     private HomeFragmentRepository homeFragmentRepository;
 
-    public LiveData<List<property_model_class>> get_home_data_list_vm(){
+    public LiveData<List<Property_model_class>> get_home_data_list_vm(){
         return home_data_list_vm;
     }
 
@@ -23,7 +23,7 @@ public class HomeFragmentViewModel extends ViewModel implements Homedataloadlist
     }
 
     @Override
-    public void onHomedataloaded(List<property_model_class> fullyloadeddata) {
+    public void onHomedataloaded(List<Property_model_class> fullyloadeddata) {
         home_data_list_vm.setValue(fullyloadeddata);
     }
 }

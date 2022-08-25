@@ -13,7 +13,7 @@ import java.util.List;
 public class PropertyFragmentViewModel extends ViewModel implements Propertydataloadlistener{
     private MutableLiveData<List<hetero_model_for_userprofile>> property_data_list_vm;
     private PropertyFragmentRepository propertyFragmentRepository;
-    private MutableLiveData<property_model_class> tosendforedit_mutable_live;
+    private MutableLiveData<Property_model_class> tosendforedit_mutable_live;
 
     public LiveData<List<hetero_model_for_userprofile>> get_property_data_list_vm(){
         return property_data_list_vm;
@@ -45,7 +45,7 @@ public class PropertyFragmentViewModel extends ViewModel implements Propertydata
     }
 
     public void setDataForPropertyFragmentToEditFragment(int position) {
-        property_model_class tosendforedit = new property_model_class(property_data_list_vm.getValue().get(position).getPhone_number(),
+        Property_model_class tosendforedit = new Property_model_class(property_data_list_vm.getValue().get(position).getPhone_number(),
                 property_data_list_vm.getValue().get(position).getAdress(),
                 property_data_list_vm.getValue().get(position).getPrice(),
                 property_data_list_vm.getValue().get(position).getDetails(),
@@ -57,7 +57,7 @@ public class PropertyFragmentViewModel extends ViewModel implements Propertydata
         tosendforedit_mutable_live.setValue(tosendforedit);
     }
 
-    public LiveData<property_model_class> getDataForPropertyFragmentToEditFragment(){
+    public LiveData<Property_model_class> getDataForPropertyFragmentToEditFragment(){
         return tosendforedit_mutable_live;
     }
 }
