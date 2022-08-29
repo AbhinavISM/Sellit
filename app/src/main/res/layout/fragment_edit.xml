@@ -1,111 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".EditFragment"
-    android:background="@drawable/download">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
-        android:id="@+id/editphoneno_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:hint="edit phone no."
-        android:textColor="@color/white"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.123"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleofeditproperty_fragment" />
+    <data>
+        <variable
+            name="inflate_edit_fragment_data"
+            type="com.example.project1.Property_model_class" />
+        <variable
+            name="viewmodel"
+            type="com.example.project1.PropertyFragmentViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/titleofeditproperty_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="EDIT PROPERTY"
-        android:textSize="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".EditFragment"
+        android:background="@drawable/download">
 
-    <EditText
-        android:id="@+id/editadress_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:hint="edit adress"
-        android:textColor="@color/white"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editphoneno_fragment" />
+        <EditText
+            android:id="@+id/editphoneno_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:hint="edit phone no."
+            android:text="@{viewmodel.dataForPropertyFragmentToEditFragment.phone_number}"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.123"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleofeditproperty_fragment" />
 
-    <EditText
-        android:id="@+id/editdetails_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:hint="edit detials"
-        android:textColor="@color/white"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editadress_fragment" />
+        <TextView
+            android:id="@+id/titleofeditproperty_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:text="EDIT PROPERTY"
+            android:textSize="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editprice_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:hint="edit price"
-        android:textColor="@color/white"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editdetails_fragment" />
+        <EditText
+            android:id="@+id/editadress_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:hint="edit adress"
+            android:text="@{viewmodel.dataForPropertyFragmentToEditFragment.adress}"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.108"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editphoneno_fragment" />
 
-    <ImageView
-        android:id="@+id/editimage_fragment"
-        android:layout_width="116dp"
-        android:layout_height="93dp"
-        android:layout_marginTop="48dp"
-        android:src="@drawable/ic_baseline_add_a_photo_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.105"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editprice_fragment" />
+        <EditText
+            android:id="@+id/editdetails_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:hint="edit detials"
+            android:text="@{viewmodel.dataForPropertyFragmentToEditFragment.details}"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.108"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editadress_fragment" />
 
-    <Button
-        android:id="@+id/updatebutton_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:text="UPDATE"
-        android:textSize="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/deletebutton_fragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.338"
-        app:layout_constraintStart_toEndOf="@+id/editimage_fragment" />
+        <EditText
+            android:id="@+id/editprice_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:hint="edit price"
+            android:text="@{viewmodel.dataForPropertyFragmentToEditFragment.price}"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.108"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editdetails_fragment" />
 
-    <Button
-        android:id="@+id/deletebutton_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:text="DELETE "
-        android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.349"
-        app:layout_constraintStart_toEndOf="@+id/editimage_fragment" />
+        <ImageView
+            android:id="@+id/editimage_fragment"
+            android:layout_width="116dp"
+            android:layout_height="93dp"
+            android:layout_marginTop="48dp"
+            android:src="@drawable/ic_baseline_add_a_photo_24"
+            android:loadImage="@{viewmodel.dataForPropertyFragmentToEditFragment.property_image}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.105"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editprice_fragment" />
+
+        <Button
+            android:id="@+id/updatebutton_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:text="UPDATE"
+            android:textSize="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/deletebutton_fragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.338"
+            app:layout_constraintStart_toEndOf="@+id/editimage_fragment" />
+
+        <Button
+            android:id="@+id/deletebutton_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="DELETE "
+            android:textSize="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.349"
+            app:layout_constraintStart_toEndOf="@+id/editimage_fragment" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
 
