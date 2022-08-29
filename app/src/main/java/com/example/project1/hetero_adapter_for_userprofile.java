@@ -20,7 +20,7 @@ import com.example.project1.databinding.UserProfileBinding;
 import java.util.List;
 
 public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
-
+//
 
     List<Hetero_model_for_userprofile> hetero_list;
     Context context;
