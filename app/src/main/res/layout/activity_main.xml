@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="83dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/images"
+        android:background="#65c3ba "
         app:menu="@menu/fragment_menu"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="675dp" />

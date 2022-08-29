@@ -29,9 +29,11 @@ public class PropertyFragmentRepository {
     List<Hetero_model_for_userprofile> property_data_list_repo;
     public static PropertyFragmentRepository instance;
     static Propertydataloadlistener propertydataloadlistener;
+    static SuccessListener successListener;
 
-    public static PropertyFragmentRepository getInstance(Propertydataloadlistener context){
+    public static PropertyFragmentRepository getInstance(Propertydataloadlistener context,SuccessListener listener){
         propertydataloadlistener = context;
+        successListener = listener;
         if(instance==null){
             instance = new PropertyFragmentRepository();
         }
@@ -107,11 +109,16 @@ public class PropertyFragmentRepository {
                             @Override
                             public void onSuccess(Uri uri) {
                                 FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profile_pic_link").setValue(uri.toString());
-//                                Toast.makeText(getContext(), "succesfully changed", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(, "succesfully changed", Toast.LENGTH_SHORT).show();
+                                successListener.onSuccess("succesfully changed");
                             }
                         });
                     }
                 }
             });
     }
+}
+
+interface SuccessListener {
+    void onSuccess(String message);
 }

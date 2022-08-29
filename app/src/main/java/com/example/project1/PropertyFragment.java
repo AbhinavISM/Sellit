@@ -56,6 +56,16 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
                 heteroadapter.notifyDataSetChanged();
             }
         });
+
+        propertyFragmentViewModel.successMessage.observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if (s != null) {
+                    Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
+                    propertyFragmentViewModel.successMessageshown();
+                }
+            }
+        });
     }
 
     void init_hetero_fragment_data() {
@@ -238,5 +248,4 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
     public static void loadImage(ImageView property_image, String URL){
         Picasso.get().load(URL).into(property_image);
     }
-
 }

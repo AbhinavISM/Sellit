@@ -1,26 +1,26 @@
 package com.example.project1;
 
 import android.net.Uri;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
-public class PropertyFragmentViewModel extends ViewModel implements Propertydataloadlistener{
+public class PropertyFragmentViewModel extends ViewModel implements Propertydataloadlistener,SuccessListener{
+
     private MutableLiveData<List<Hetero_model_for_userprofile>> property_data_list_vm;
     private PropertyFragmentRepository propertyFragmentRepository;
     private MutableLiveData<Property_model_class> tosendforedit_mutable_live;
+    MutableLiveData<String> successMessage = new MutableLiveData<String>();
 
     public LiveData<List<Hetero_model_for_userprofile>> get_property_data_list_vm(){
         return property_data_list_vm;
     }
     public void initPropertyFragmentViewModel(){
         if(property_data_list_vm == null){
-            propertyFragmentRepository = PropertyFragmentRepository.getInstance(this);
+            propertyFragmentRepository = PropertyFragmentRepository.getInstance(this,this);
             property_data_list_vm = propertyFragmentRepository.getProperty_data_list_repo();
         }
     }
@@ -59,5 +59,14 @@ public class PropertyFragmentViewModel extends ViewModel implements Propertydata
 
     public LiveData<Property_model_class> getDataForPropertyFragmentToEditFragment(){
         return tosendforedit_mutable_live;
+    }
+
+    @Override
+    public void onSuccess(String message) {
+        successMessage.postValue(message);
+    }
+
+    public void successMessageshown() {
+        successMessage.postValue(null);
     }
 }
