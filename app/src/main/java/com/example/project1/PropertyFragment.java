@@ -66,7 +66,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
                 }
             }
         });
-    }
+    }//
 
     void init_hetero_fragment_data() {
 //        heteromodel = new ArrayList<>();
