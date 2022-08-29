@@ -21,6 +21,8 @@ import java.util.List;
 
 public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
 
+    //bakwaas
+
     List<Hetero_model_for_userprofile> hetero_list;
     Context context;
     recyclerInterface recycler_interafce_for_profile;
