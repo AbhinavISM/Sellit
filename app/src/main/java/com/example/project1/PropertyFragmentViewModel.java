@@ -1,12 +1,15 @@
 package com.example.project1;
 
 import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
+import java.util.Map;
 
 public class PropertyFragmentViewModel extends ViewModel implements Propertydataloadlistener,SuccessListener{
 
@@ -42,6 +45,18 @@ public class PropertyFragmentViewModel extends ViewModel implements Propertydata
 
     public void change_profile_pic(Uri profile_image_uri, String image_name){
         propertyFragmentRepository.change_profile_pic_repo(profile_image_uri,image_name);
+    }
+
+    public void update_property(Uri edit_image_uri, String image_name, Map<String,Object> map){
+        propertyFragmentRepository.update_property_repo(edit_image_uri,image_name,map);
+    }
+
+    public void delete_property(String image_url, String property_ID_particular, String property_ID){
+        propertyFragmentRepository.delete_property_repo(image_url,property_ID_particular,property_ID);
+    }
+
+    public void add_property(String adress, String phoneno, String details, String price,String image_name, Uri image_uri){
+        propertyFragmentRepository.add_property_repo(adress,phoneno,details,price,image_name,image_uri);
     }
 
     public void setDataForPropertyFragmentToEditFragment(int position) {

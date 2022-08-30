@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
     LinearLayoutManager heterolayoutManager;
     Uri profile_image_uri;
     PropertyFragmentViewModel propertyFragmentViewModel;
-
+    myPropertyViewModel RoomViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,6 +65,14 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
                     Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
                     propertyFragmentViewModel.successMessageshown();
                 }
+            }
+        });
+
+        RoomViewModel = new ViewModelProvider(getActivity()).get(myPropertyViewModel.class);
+        RoomViewModel.getAllmyProperty().observe(getActivity(), new Observer<List<myPropertyEntity>>() {
+            @Override
+            public void onChanged(List<myPropertyEntity> myPropertyEntities) {
+                Log.d("offline data size", String.valueOf(myPropertyEntities.size()));
             }
         });
     }//
