@@ -17,6 +17,7 @@ public class PropertyFragmentViewModel extends ViewModel implements Propertydata
     private PropertyFragmentRepository propertyFragmentRepository;
     private MutableLiveData<Property_model_class> tosendforedit_mutable_live;
     MutableLiveData<String> successMessage = new MutableLiveData<String>();
+    int adapterpositionforpropertyfragmnettoeditfragment;
 
     public LiveData<List<Hetero_model_for_userprofile>> get_property_data_list_vm(){
         return property_data_list_vm;
@@ -70,12 +71,15 @@ public class PropertyFragmentViewModel extends ViewModel implements Propertydata
                 property_data_list_vm.getValue().get(position).getProperty_ID_paticular());
         tosendforedit_mutable_live = new MutableLiveData<>();
         tosendforedit_mutable_live.setValue(tosendforedit);
+        adapterpositionforpropertyfragmnettoeditfragment = position;
     }
 
     public LiveData<Property_model_class> getDataForPropertyFragmentToEditFragment(){
         return tosendforedit_mutable_live;
     }
-
+    public int getAdapterpositionforpropertyfragmnettoeditfragment(){
+        return adapterpositionforpropertyfragmnettoeditfragment;
+    }
     @Override
     public void onSuccess(String message) {
         successMessage.postValue(message);

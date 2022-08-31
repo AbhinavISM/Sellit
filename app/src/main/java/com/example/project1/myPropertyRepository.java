@@ -1,5 +1,7 @@
 package com.example.project1;
 
+import static com.example.project1.Hetero_model_for_userprofile.user_property_case;
+
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
@@ -49,7 +51,7 @@ public class myPropertyRepository {
                     FirebaseStorage.getInstance().getReference("uploads").child(image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            mypropertydao.insert_property_offline(new myPropertyEntity(phoneno,adress,price,details,name[0],String.valueOf(uri)));
+                            mypropertydao.insert_property_offline(new myPropertyEntity(phoneno,adress,price,details,name[0],String.valueOf(uri), user_property_case));
                             Log.d("hum jeet gaye", "room");
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -69,8 +71,20 @@ public class myPropertyRepository {
     public void update_property_offline(myPropertyEntity my_property_entity){
         mypropertydao.update_property_offline(my_property_entity);
     }
-    public void delete_property_offline(myPropertyEntity my_property_entity){
-        mypropertydao.delete_property_offline(my_property_entity);
+    public void delete_property_offline(String image_url, int adapter_position){
+
+        FirebaseStorage.getInstance().getReferenceFromUrl(image_url).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+//                    Toast.makeText(getContext(), "Image deleted!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+//                    Toast.makeText(getContext(), "Image delete failed!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        mypropertydao.delete_property_offline(offline_property_list_repo.getValue().get(adapter_position));
     }
     public LiveData<List<myPropertyEntity>> getAllmyProperty(){
         return offline_property_list_repo;

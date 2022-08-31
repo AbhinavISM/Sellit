@@ -27,8 +27,8 @@ public class myPropertyViewModel extends AndroidViewModel {
         mypropertyRepository.update_property_offline(my_property_entity);
     }
 
-    public void delete_property_offline(myPropertyEntity my_property_entity){
-        mypropertyRepository.delete_property_offline(my_property_entity);
+    public void delete_property_offline(String image_url, int adapter_position){
+        mypropertyRepository.delete_property_offline(image_url,adapter_position);
     }
 
     public LiveData<List<myPropertyEntity>> getAllmyProperty(){

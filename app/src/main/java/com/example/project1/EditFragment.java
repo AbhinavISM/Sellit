@@ -45,6 +45,8 @@ public class EditFragment extends Fragment {
 //    Button delete_button;
 
     PropertyFragmentViewModel propertyFragmentViewModel;
+    myPropertyViewModel RoomViewModel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class EditFragment extends Fragment {
         View view = fragmentEditBinding.getRoot();
         fragmentEditBinding.setLifecycleOwner(this);
         propertyFragmentViewModel = new ViewModelProvider(getActivity()).get(PropertyFragmentViewModel.class);
+        RoomViewModel = new ViewModelProvider(getActivity()).get(myPropertyViewModel.class);
         fragmentEditBinding.setViewmodel(propertyFragmentViewModel);
         return view;
     }
@@ -87,6 +90,8 @@ public class EditFragment extends Fragment {
                 property_ID_particular = recieved_data.getProperty_ID_particular();
             }
         });
+        adapter_position = propertyFragmentViewModel.getAdapterpositionforpropertyfragmnettoeditfragment();
+
         fragmentEditBinding.editimageFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,6 +123,7 @@ public class EditFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 propertyFragmentViewModel.delete_property(image_url,property_ID_particular,property_ID);
+                RoomViewModel.delete_property_offline(image_url,adapter_position);
             }
         });
     }

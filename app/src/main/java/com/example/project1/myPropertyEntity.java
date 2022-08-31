@@ -15,14 +15,20 @@ public class myPropertyEntity {
     private String Details;
     private String Offeredby;
     private String Property_image;
+    private int viewtype_room;
 
-    public myPropertyEntity(String Phone_number, String Adress, String Price, String Details, String Offeredby, String Property_image) {
+    public int getViewtype_room() {
+        return viewtype_room;
+    }
+
+    public myPropertyEntity(String Phone_number, String Adress, String Price, String Details, String Offeredby, String Property_image, int viewtype_room) {
         this.Phone_number = Phone_number;
         this.Adress = Adress;
         this.Price = Price;
         this.Details = Details;
         this.Offeredby = Offeredby;
         this.Property_image = Property_image;
+        this.viewtype_room = viewtype_room;
     }
 
 
