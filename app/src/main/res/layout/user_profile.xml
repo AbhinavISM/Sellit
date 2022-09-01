@@ -16,20 +16,37 @@
             name="profile_image_url"
             type="String" />
     </data>
-
+<com.google.android.material.circularreveal.cardview.CircularRevealCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="50dp"
+    app:cardElevation="50dp">
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color1"
-        android:layout_margin="8dp">
+        android:background="@color/white"
+        android:layout_margin="0dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:loadProfilePhoto="@{profile_image_url}"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center_horizontal"
+                tools:srcCompat="@tools:sample/avatars" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
@@ -39,13 +56,15 @@
                 android:text="PROFILE : "
                 android:textSize="16dp"
                 android:textStyle="bold"
-                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="12dp"
                 android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -65,12 +84,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:text="Email : "
                     android:textSize="24dp" />
 
@@ -80,7 +100,7 @@
                     android:text="@{profile_email}"
                     android:textSize="24dp"
                     android:id="@+id/profile_useremail_fromfirebase"
-                    android:layout_marginTop="16dp" />
+                    android:layout_marginTop="0dp" />
             </LinearLayout>
 
             <TextView
@@ -89,23 +109,13 @@
                 android:layout_marginTop="16dp"
                 android:text="your property :"
                 android:textSize="16dp"
+                android:layout_marginLeft="12dp"
                 android:textColor="@color/black"
                 android:textAllCaps="true"
                 android:textStyle="italic" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/profile_image"
-                android:loadProfilePhoto="@{profile_image_url}"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                tools:srcCompat="@tools:sample/avatars" />
-        </LinearLayout>
 
     </LinearLayout>
+</com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 </layout>
