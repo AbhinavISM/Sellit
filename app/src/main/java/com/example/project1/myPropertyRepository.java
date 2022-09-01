@@ -15,11 +15,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.List;
+import java.util.Objects;
 
 public class myPropertyRepository {
     private myPropertydao mypropertydao;
@@ -68,6 +71,73 @@ public class myPropertyRepository {
             }
         });
     }
+    public void insert_property_since_room_khali_tha(String phoneno, String adress, String price, String details, String url, String offered_by){
+        mypropertydao.insert_property_offline(new myPropertyEntity(phoneno,adress,price,details,offered_by,url, user_property_case));
+
+    }
+    public void roomKhaliHainBharDeBhai(){
+//        property_data_list_repo = new ArrayList<>();
+
+        final String[] username = new String[1];
+        final String[] useremail = new String[1];
+        final String[] user_profile_link = new String[1];
+        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                    username[0] = Objects.requireNonNull(task.getResult().getValue()).toString();
+                    Log.d("name : ",String.valueOf(username[0]));
+
+                    // ab email nikal
+                    FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("email").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            if(task.isSuccessful()){
+                                useremail[0] = Objects.requireNonNull(task.getResult().getValue(String.class));
+                                Log.d("email : ",useremail[0]);
+                                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profile_pic_link").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            user_profile_link[0] = task.getResult().getValue(String.class);
+                                            if(user_profile_link[0]==null){
+                                                user_profile_link[0] = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzsiq2kL7EYn1TofQ1k8lLzdZhN5eyWjINA&usqp=CAU";
+                                            }
+                                            FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("property added by this user").addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                                    property_data_list_repo.clear();
+//                                                    property_data_list_repo.add(new Hetero_model_for_userprofile(user_profile_case,username[0],useremail[0],user_profile_link[0]));
+                                                    for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                                                        Property_model_class property_model_data = dataSnapshot.getValue(Property_model_class.class);
+//                                                        property_data_list_repo.add(new Hetero_model_for_userprofile(property_model_data.getPhone_number(),property_model_data.getAdress(),property_model_data.getPrice(),property_model_data.getDetails(),property_model_data.getOfferedby(),property_model_data.getProperty_image(),property_model_data.getProperty_ID(),property_model_data.getProperty_ID_particular()));
+                                                        insert_property_since_room_khali_tha(
+                                                                property_model_data.getPhone_number(),
+                                                                property_model_data.getAdress(),
+                                                                property_model_data.getPrice(),
+                                                                property_model_data.getDetails(),
+                                                                property_model_data.getProperty_image(),
+                                                                property_model_data.getOfferedby());
+                                                    }
+//                                                    propertydataloadlistener.onPropertydataloaded(property_data_list_repo);
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
     public void update_property_offline(myPropertyEntity my_property_entity){
         mypropertydao.update_property_offline(my_property_entity);
     }
@@ -85,6 +155,14 @@ public class myPropertyRepository {
             }
         });
         mypropertydao.delete_property_offline(offline_property_list_repo.getValue().get(adapter_position));
+    }
+
+    public void allofflinedelete(){
+        int i = offline_property_list_repo.getValue().size()-1;
+        while( i > 0){
+            mypropertydao.delete_property_offline(offline_property_list_repo.getValue().get(i));
+            i--;
+        }
     }
     public LiveData<List<myPropertyEntity>> getAllmyProperty(){
         return offline_property_list_repo;

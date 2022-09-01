@@ -28,7 +28,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Objects;
 
 public class this_user extends AppCompatActivity implements recyclerInterface, add_profile_pic_interface {
@@ -125,7 +128,128 @@ public class this_user extends AppCompatActivity implements recyclerInterface, a
         heterolayoutManager = new LinearLayoutManager(this);
         heterolayoutManager.setOrientation(RecyclerView.VERTICAL);
         heterorecyclerView.setLayoutManager(heterolayoutManager);
-        heteroadapter = new hetero_adapter_for_userprofile(heteromodel,this,this,this);
+        heteroadapter = new hetero_adapter_for_userprofile(new List<myPropertyEntity>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(@Nullable Object o) {
+                return false;
+            }
+
+            @NonNull
+            @Override
+            public Iterator<myPropertyEntity> iterator() {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @NonNull
+            @Override
+            public <T> T[] toArray(@NonNull T[] ts) {
+                return null;
+            }
+
+            @Override
+            public boolean add(myPropertyEntity myPropertyEntity) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(@Nullable Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(@NonNull Collection<?> collection) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(@NonNull Collection<? extends myPropertyEntity> collection) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(int i, @NonNull Collection<? extends myPropertyEntity> collection) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(@NonNull Collection<?> collection) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(@NonNull Collection<?> collection) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public myPropertyEntity get(int i) {
+                return null;
+            }
+
+            @Override
+            public myPropertyEntity set(int i, myPropertyEntity myPropertyEntity) {
+                return null;
+            }
+
+            @Override
+            public void add(int i, myPropertyEntity myPropertyEntity) {
+
+            }
+
+            @Override
+            public myPropertyEntity remove(int i) {
+                return null;
+            }
+
+            @Override
+            public int indexOf(@Nullable Object o) {
+                return 0;
+            }
+
+            @Override
+            public int lastIndexOf(@Nullable Object o) {
+                return 0;
+            }
+
+            @NonNull
+            @Override
+            public ListIterator<myPropertyEntity> listIterator() {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public ListIterator<myPropertyEntity> listIterator(int i) {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public List<myPropertyEntity> subList(int i, int i1) {
+                return null;
+            }
+        }, this, this, this);
         heterorecyclerView.setAdapter(heteroadapter);
         heteroadapter.notifyDataSetChanged();
     }

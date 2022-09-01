@@ -50,11 +50,12 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
         super.onViewCreated(view, savedInstanceState);
         propertyFragmentViewModel = new ViewModelProvider(getActivity()).get(PropertyFragmentViewModel.class);
         propertyFragmentViewModel.initPropertyFragmentViewModel();
+        RoomViewModel = new ViewModelProvider(getActivity()).get(myPropertyViewModel.class);
         init_hetero_fragment_recycler();
         propertyFragmentViewModel.get_property_data_list_vm().observe(getActivity(), new Observer<List<Hetero_model_for_userprofile>>() {
             @Override
             public void onChanged(List<Hetero_model_for_userprofile> Hetero_model_for_userprofiles) {
-                heteroadapter.notifyDataSetChanged();
+//                heteroadapter.notifyDataSetChanged();
             }
         });
 
@@ -68,11 +69,17 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
             }
         });
 
-        RoomViewModel = new ViewModelProvider(getActivity()).get(myPropertyViewModel.class);
         RoomViewModel.getAllmyProperty().observe(getActivity(), new Observer<List<myPropertyEntity>>() {
             @Override
             public void onChanged(List<myPropertyEntity> myPropertyEntities) {
                 Log.d("offline data size", String.valueOf(myPropertyEntities.size()));
+                if(myPropertyEntities.size()!=0) {
+                    heteroadapter.setHetero_entity_list(myPropertyEntities);
+                    heteroadapter.notifyDataSetChanged();
+                }
+                else{
+                    RoomViewModel.roomKhaliHainBharDebhai();
+                }
             }
         });
     }//
@@ -157,7 +164,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
             heterolayoutManager = new LinearLayoutManager(getContext());
             heterolayoutManager.setOrientation(RecyclerView.VERTICAL);
             heterorecyclerView.setLayoutManager(heterolayoutManager);
-            heteroadapter = new hetero_adapter_for_userprofile(propertyFragmentViewModel.get_property_data_list_vm().getValue(), getContext(), this, this);
+            heteroadapter = new hetero_adapter_for_userprofile(RoomViewModel.getAllmyProperty().getValue(), getContext(), this, this);
             heterorecyclerView.setAdapter(heteroadapter);
             heteroadapter.notifyDataSetChanged();
         }
@@ -176,6 +183,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
         boolean logout_successful = propertyFragmentViewModel.logout_user();
         if (logout_successful) {
             Toast.makeText(getContext(),"logged out succesfully",Toast.LENGTH_LONG).show();
+            RoomViewModel.allofflinedelete();
             startActivity(new Intent(getActivity(),login.class));
             getActivity().finish();
         }

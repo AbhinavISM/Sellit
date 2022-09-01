@@ -21,22 +21,33 @@ import java.util.List;
 
 public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
 //
-
-    List<Hetero_model_for_userprofile> hetero_list;
+    List<myPropertyEntity> hetero_entity_list;
+//    List<Hetero_model_for_userprofile> hetero_list;
     Context context;
     recyclerInterface recycler_interafce_for_profile;
     add_profile_pic_interface profile_pic_interface;
 
     @Override
     public int getItemViewType(int position) {
-        return hetero_list.get(position).getViewtype();
+//        return hetero_list.get(position).getViewtype();
+        if(hetero_entity_list == null){
+            return user_property_case;
+        }
+        else{
+            return  hetero_entity_list.get(position).getViewtype_room();
+        }
     }
 
-    public hetero_adapter_for_userprofile(List<Hetero_model_for_userprofile> hetero_list, Context context, recyclerInterface reycler_interafce_for_profile, add_profile_pic_interface profile_pic_interface) {
-        this.hetero_list = hetero_list;
+    public hetero_adapter_for_userprofile(List<myPropertyEntity> hetero_entity_list, Context context, recyclerInterface reycler_interafce_for_profile, add_profile_pic_interface profile_pic_interface) {
+//        this.hetero_list = hetero_list;
+        this.hetero_entity_list = hetero_entity_list;
         this.context = context;
         this.recycler_interafce_for_profile = reycler_interafce_for_profile;
         this.profile_pic_interface = profile_pic_interface;
+    }
+
+    public void setHetero_entity_list(List<myPropertyEntity> hetero_entity_list){
+        this.hetero_entity_list = hetero_entity_list;
     }
 
     @NonNull
@@ -58,23 +69,31 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        switch (hetero_list.get(position).getViewtype()){
-            case user_profile_case:
-                String profile_image_data = hetero_list.get(position).getProfile_image();
-                String profile_username_fromfirebase_data = hetero_list.get(position).getProfile_username_fromfirebase();
-                String profile_useremail_fromfirebase_data = hetero_list.get(position).getProfile_useremail_fromirebase();
-                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileImageUrl(profile_image_data);
-                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileEmail(profile_useremail_fromfirebase_data);
-                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileUsername(profile_username_fromfirebase_data);
-                break;
+        switch (hetero_entity_list.get(position).getViewtype_room()){
+//            case user_profile_case:
+//                String profile_image_data = hetero_list.get(position).getProfile_image();
+//                String profile_username_fromfirebase_data = hetero_list.get(position).getProfile_username_fromfirebase();
+//                String profile_useremail_fromfirebase_data = hetero_list.get(position).getProfile_useremail_fromirebase();
+//                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileImageUrl(profile_image_data);
+//                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileEmail(profile_useremail_fromfirebase_data);
+//                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileUsername(profile_username_fromfirebase_data);
+//                break;
             case user_property_case:
-                String adressdata = hetero_list.get(position).getAdress();
-                String phnodata = hetero_list.get(position).getPhone_number();
+//                String adressdata = hetero_list.get(position).getAdress();
+//                String phnodata = hetero_list.get(position).getPhone_number();
+//                Log.d("phone no print kiya hain, dekh adress siiciiv mil rha hain kya",phnodata);
+//                String pricedata = hetero_list.get(position).getPrice();
+//                String detailsdata = hetero_list.get(position).getDetails();
+//                String offerdbydata = hetero_list.get(position).getOfferedby();
+//                String imagedata = hetero_list.get(position).getProperty_image();
+
+                String adressdata = hetero_entity_list.get(position).getAdress();
+                String phnodata = hetero_entity_list.get(position).getPhone_number();
                 Log.d("phone no print kiya hain, dekh adress siiciiv mil rha hain kya",phnodata);
-                String pricedata = hetero_list.get(position).getPrice();
-                String detailsdata = hetero_list.get(position).getDetails();
-                String offerdbydata = hetero_list.get(position).getOfferedby();
-                String imagedata = hetero_list.get(position).getProperty_image();
+                String pricedata = hetero_entity_list.get(position).getPrice();
+                String detailsdata = hetero_entity_list.get(position).getDetails();
+                String offerdbydata = hetero_entity_list.get(position).getOfferedby();
+                String imagedata = hetero_entity_list.get(position).getProperty_image();
                 ((user_property_case_ViewHolder)holder).propertyLayoutBinding1.setPropertyModelClassData(
                         new Property_model_class(phnodata, adressdata,pricedata,detailsdata,offerdbydata,imagedata,"dummy", "dummy"));
                 break;
@@ -83,7 +102,12 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
 
     @Override
     public int getItemCount() {
-        return hetero_list.size();
+        if(hetero_entity_list == null){
+            return 0;
+        }
+        else {
+            return hetero_entity_list.size();
+        }
     }
 
      class user_profile_case_ViewHolder extends RecyclerView.ViewHolder{

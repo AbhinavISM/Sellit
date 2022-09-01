@@ -31,6 +31,14 @@ public class myPropertyViewModel extends AndroidViewModel {
         mypropertyRepository.delete_property_offline(image_url,adapter_position);
     }
 
+    public void roomKhaliHainBharDebhai(){
+        mypropertyRepository.roomKhaliHainBharDeBhai();
+    }
+
+    public void allofflinedelete(){
+        mypropertyRepository.allofflinedelete();
+    }
+
     public LiveData<List<myPropertyEntity>> getAllmyProperty(){
         return offline_property_list;
     }
