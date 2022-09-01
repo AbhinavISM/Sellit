@@ -70,14 +70,14 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (hetero_entity_list.get(position).getViewtype_room()){
-//            case user_profile_case:
-//                String profile_image_data = hetero_list.get(position).getProfile_image();
-//                String profile_username_fromfirebase_data = hetero_list.get(position).getProfile_username_fromfirebase();
-//                String profile_useremail_fromfirebase_data = hetero_list.get(position).getProfile_useremail_fromirebase();
-//                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileImageUrl(profile_image_data);
-//                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileEmail(profile_useremail_fromfirebase_data);
-//                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileUsername(profile_username_fromfirebase_data);
-//                break;
+            case user_profile_case:
+                String profile_image_data = hetero_entity_list.get(position).getProfile_image_room();
+                String profile_username_fromfirebase_data = hetero_entity_list.get(position).getProfile_username_room();
+                String profile_useremail_fromfirebase_data = hetero_entity_list.get(position).getProfile_useremail_room();
+                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileImageUrl(profile_image_data);
+                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileEmail(profile_useremail_fromfirebase_data);
+                ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileUsername(profile_username_fromfirebase_data);
+                break;
             case user_property_case:
 //                String adressdata = hetero_list.get(position).getAdress();
 //                String phnodata = hetero_list.get(position).getPhone_number();

@@ -1,5 +1,6 @@
 package com.example.project1;
 
+import static com.example.project1.Hetero_model_for_userprofile.user_profile_case;
 import static com.example.project1.Hetero_model_for_userprofile.user_property_case;
 
 import android.content.Context;
@@ -54,7 +55,7 @@ public class myPropertyRepository {
                     FirebaseStorage.getInstance().getReference("uploads").child(image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            mypropertydao.insert_property_offline(new myPropertyEntity(phoneno,adress,price,details,name[0],String.valueOf(uri), user_property_case));
+                            mypropertydao.insert_property_offline(new myPropertyEntity(phoneno,adress,price,details,name[0],String.valueOf(uri), user_property_case, "","",""));
                             Log.d("hum jeet gaye", "room");
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -72,8 +73,11 @@ public class myPropertyRepository {
         });
     }
     public void insert_property_since_room_khali_tha(String phoneno, String adress, String price, String details, String url, String offered_by){
-        mypropertydao.insert_property_offline(new myPropertyEntity(phoneno,adress,price,details,offered_by,url, user_property_case));
+        mypropertydao.insert_property_offline(new myPropertyEntity(phoneno,adress,price,details,offered_by,url, user_property_case,"","",""));
+    }
 
+    public void insert_profile_since_room_khali_tha(String username, String useremail, String profile_image){
+        mypropertydao.insert_property_offline(new myPropertyEntity("","","","","","",user_profile_case,username,useremail,profile_image));
     }
     public void roomKhaliHainBharDeBhai(){
 //        property_data_list_repo = new ArrayList<>();
@@ -103,6 +107,7 @@ public class myPropertyRepository {
                                             if(user_profile_link[0]==null){
                                                 user_profile_link[0] = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzsiq2kL7EYn1TofQ1k8lLzdZhN5eyWjINA&usqp=CAU";
                                             }
+                                            insert_profile_since_room_khali_tha(username[0],useremail[0],user_profile_link[0]);
                                             FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("property added by this user").addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -159,7 +164,7 @@ public class myPropertyRepository {
 
     public void allofflinedelete(){
         int i = offline_property_list_repo.getValue().size()-1;
-        while( i > 0){
+        while( i >= 0){
             mypropertydao.delete_property_offline(offline_property_list_repo.getValue().get(i));
             i--;
         }

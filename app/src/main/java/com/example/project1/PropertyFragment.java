@@ -24,6 +24,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -77,7 +78,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
                     heteroadapter.setHetero_entity_list(myPropertyEntities);
                     heteroadapter.notifyDataSetChanged();
                 }
-                else{
+                else if(FirebaseAuth.getInstance().getCurrentUser()!=null){
                     RoomViewModel.roomKhaliHainBharDebhai();
                 }
             }
