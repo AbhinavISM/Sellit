@@ -116,6 +116,7 @@ public class EditFragment extends Fragment {
                 map.put("property_ID",property_ID);
                 map.put("property_ID_particular",property_ID_particular);
                 propertyFragmentViewModel.update_property(edit_image_uri,image_name,map);
+                RoomViewModel.update_property_offline(edit_image_uri,image_name,map,adapter_position);
             }
         });
 

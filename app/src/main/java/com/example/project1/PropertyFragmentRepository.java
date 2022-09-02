@@ -170,6 +170,31 @@ public class PropertyFragmentRepository {
         }
         else {
             Log.d("image add kiya", "nahi");
+            FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("property added by this user").child(String.valueOf(map.getOrDefault("property_ID_particular",""))).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+//                                           Toast.makeText(getContext(), "particular succesfull", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+//                                           Toast.makeText(getContext(), "particular failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            FirebaseDatabase.getInstance().getReference("property added by all users").child(String.valueOf(map.getOrDefault("property_ID",""))).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+//                                           Toast.makeText(getContext(), "common succesfull", Toast.LENGTH_SHORT).show();
+//                                                   USE THE FOLLOWING INTENT WHEN USING IN ACTIVITY MODE
+//                                                   startActivity(new Intent(update_delete_activity.this,this_user.class));
+//                                                   finish();
+                    }
+                    else{
+//                                           Toast.makeText(getContext(), "common failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
     }
 

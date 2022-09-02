@@ -23,6 +23,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class myPropertyRepository {
@@ -143,8 +144,55 @@ public class myPropertyRepository {
             }
         });
     }
-    public void update_property_offline(myPropertyEntity my_property_entity){
-        mypropertydao.update_property_offline(my_property_entity);
+    public void update_property_offline(Uri edit_image_uri, String image_name, Map<String,Object> map, int adapter_position){
+        if(edit_image_uri != null) {
+            Log.d("image add kiya","haa");
+            FirebaseStorage.getInstance().getReference("uploads").child(image_name).putFile(edit_image_uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if (task.isSuccessful()) {
+//                        Toast.makeText(getContext(), "storage upload success", Toast.LENGTH_SHORT).show();
+                        FirebaseStorage.getInstance().getReference("uploads").child(image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                map.put("property_image", String.valueOf(uri));
+//                                Log.d("naya url",image_url+" "+offered_by+" "+property_ID+" "+property_ID_particular);
+                                myPropertyEntity to_update_entity = new myPropertyEntity(String.valueOf(map.getOrDefault("phone_number","")),
+                                        String.valueOf(map.getOrDefault("adress","")),
+                                        String.valueOf(map.getOrDefault("price","")),
+                                        String.valueOf(map.getOrDefault("details","")),
+                                        String.valueOf(map.getOrDefault("offeredby","")),
+                                        String.valueOf(map.getOrDefault("property_image","")),
+                                        user_property_case,
+                                        "",
+                                        "",
+                                        "");
+                                to_update_entity.setId(offline_property_list_repo.getValue().get(adapter_position).getId());
+                                mypropertydao.update_property_offline(to_update_entity);
+                            }
+                        });
+                    }
+                    else{
+//                        Toast.makeText(getContext(), "storage upload faliure", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+        else {
+            myPropertyEntity to_update_entity = new myPropertyEntity(String.valueOf(map.getOrDefault("phone_number","")),
+                    String.valueOf(map.getOrDefault("adress","")),
+                    String.valueOf(map.getOrDefault("price","")),
+                    String.valueOf(map.getOrDefault("details","")),
+                    String.valueOf(map.getOrDefault("offeredby","")),
+                    String.valueOf(map.getOrDefault("property_image","")),
+                    user_property_case,
+                    "",
+                    "",
+                    "");
+            to_update_entity.setId(offline_property_list_repo.getValue().get(adapter_position).getId());
+            mypropertydao.update_property_offline(to_update_entity);
+        }
+//        mypropertydao.update_property_offline(my_property_entity);
     }
     public void delete_property_offline(String image_url, int adapter_position){
 

@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.Map;
 
 public class myPropertyViewModel extends AndroidViewModel {
     private myPropertyRepository mypropertyRepository;
@@ -23,8 +24,8 @@ public class myPropertyViewModel extends AndroidViewModel {
         mypropertyRepository.insert_property_offline(phoneno,adress,price,details,image_name,image_uri);
     }
 
-    public void update_property_offline(myPropertyEntity my_property_entity){
-        mypropertyRepository.update_property_offline(my_property_entity);
+    public void update_property_offline(Uri edit_image_uri, String image_name, Map<String,Object> map, int adapter_position){
+        mypropertyRepository.update_property_offline(edit_image_uri, image_name, map, adapter_position);
     }
 
     public void delete_property_offline(String image_url, int adapter_position){
