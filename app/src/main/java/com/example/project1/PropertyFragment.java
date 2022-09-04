@@ -259,11 +259,11 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
 
     @BindingAdapter("android:loadProfilePhoto")
     public static void loadProfilePhoto(ImageView profile_image, String URL){
-        Picasso.get().load(URL).into(profile_image);
+        Picasso.get().load(URL).fit().centerCrop().into(profile_image);
     }
 
     @BindingAdapter("android:loadImage")
     public static void loadImage(ImageView property_image, String URL){
-        Picasso.get().load(URL).into(property_image);
+        Picasso.get().load(URL).fit().centerCrop().into(property_image);
     }
 }
