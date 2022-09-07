@@ -30,7 +30,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 
-public class PropertyFragment extends Fragment implements add_profile_pic_interface, recyclerInterface {
+public class PropertyFragment extends Fragment implements add_profile_pic_interface, recyclerInterface, MapInterface {
 
     RecyclerView heterorecyclerView;
     hetero_adapter_for_userprofile heteroadapter;
@@ -39,6 +39,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
     Uri profile_image_uri;
     PropertyFragmentViewModel propertyFragmentViewModel;
     myPropertyViewModel RoomViewModel;
+    NavController navController;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
 //                heteroadapter.notifyDataSetChanged();
             }
         });
-
+        navController = Navigation.findNavController(getView());
         propertyFragmentViewModel.successMessage.observe(getActivity(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -165,7 +166,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
             heterolayoutManager = new LinearLayoutManager(getContext());
             heterolayoutManager.setOrientation(RecyclerView.VERTICAL);
             heterorecyclerView.setLayoutManager(heterolayoutManager);
-            heteroadapter = new hetero_adapter_for_userprofile(RoomViewModel.getAllmyProperty().getValue(), getContext(), this, this);
+            heteroadapter = new hetero_adapter_for_userprofile(RoomViewModel.getAllmyProperty().getValue(), getContext(), this, this,this);
             heterorecyclerView.setAdapter(heteroadapter);
             heteroadapter.notifyDataSetChanged();
         }
@@ -210,7 +211,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
 //        edit_prop_intent.putExtra("adapter_pos",position);
 //        startActivity(edit_prop_intent);
 
-        NavController navController = Navigation.findNavController(getView());
+
         propertyFragmentViewModel.setDataForPropertyFragmentToEditFragment(position);
 //        Property_model_class tosendforedit = new Property_model_class(propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getPhone_number(),
 //                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getAdress(),
@@ -265,5 +266,11 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
     @BindingAdapter("android:loadImage")
     public static void loadImage(ImageView property_image, String URL){
         Picasso.get().load(URL).fit().centerCrop().into(property_image);
+    }
+
+    @Override
+    public void startmap() {
+        NavDirections action = PropertyFragmentDirections.actionPropertyFragmentToMapsFragment();
+        navController.navigate(action);
     }
 }

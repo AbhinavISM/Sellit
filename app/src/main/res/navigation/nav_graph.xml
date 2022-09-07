@@ -24,10 +24,24 @@
         <action
             android:id="@+id/action_propertyFragment_to_editFragment"
             app:destination="@id/editFragment" />
+        <action
+            android:id="@+id/action_propertyFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editFragment"
         android:name="com.example.project1.EditFragment"
         android:label="fragment_edit"
         tools:layout="@layout/fragment_edit" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.project1.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_propertyFragment"
+            app:destination="@id/propertyFragment"
+            app:popUpTo="@id/propertyFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

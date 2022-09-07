@@ -26,7 +26,7 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
     Context context;
     recyclerInterface recycler_interafce_for_profile;
     add_profile_pic_interface profile_pic_interface;
-
+    MapInterface mapInterface;
     @Override
     public int getItemViewType(int position) {
 //        return hetero_list.get(position).getViewtype();
@@ -38,12 +38,13 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
         }
     }
 
-    public hetero_adapter_for_userprofile(List<myPropertyEntity> hetero_entity_list, Context context, recyclerInterface reycler_interafce_for_profile, add_profile_pic_interface profile_pic_interface) {
+    public hetero_adapter_for_userprofile(List<myPropertyEntity> hetero_entity_list, Context context, recyclerInterface reycler_interafce_for_profile, add_profile_pic_interface profile_pic_interface, MapInterface mapInterface) {
 //        this.hetero_list = hetero_list;
         this.hetero_entity_list = hetero_entity_list;
         this.context = context;
         this.recycler_interafce_for_profile = reycler_interafce_for_profile;
         this.profile_pic_interface = profile_pic_interface;
+        this.mapInterface = mapInterface;
     }
 
     public void setHetero_entity_list(List<myPropertyEntity> hetero_entity_list){
@@ -121,7 +122,14 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
                     showPopupMenu(view);
                 }
             });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mapInterface.startmap();
+                }
+            });
         }
+
         void showPopupMenu(View v){
             PopupMenu popupMenu = new PopupMenu(v.getContext(),v);
             popupMenu.inflate(R.menu.profile_menu);

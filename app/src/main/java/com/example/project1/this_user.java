@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
 
-public class this_user extends AppCompatActivity implements recyclerInterface, add_profile_pic_interface {
+public class this_user extends AppCompatActivity implements recyclerInterface, add_profile_pic_interface,MapInterface {
     RecyclerView heterorecyclerView;
     hetero_adapter_for_userprofile heteroadapter;
     List<Hetero_model_for_userprofile> heteromodel;
@@ -249,7 +249,7 @@ public class this_user extends AppCompatActivity implements recyclerInterface, a
             public List<myPropertyEntity> subList(int i, int i1) {
                 return null;
             }
-        }, this, this, this);
+        }, this, this, this,this);
         heterorecyclerView.setAdapter(heteroadapter);
         heteroadapter.notifyDataSetChanged();
     }
@@ -318,5 +318,10 @@ public class this_user extends AppCompatActivity implements recyclerInterface, a
         ContentResolver cr = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(Auri));
+    }
+
+    @Override
+    public void startmap() {
+
     }
 }
