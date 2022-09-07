@@ -1,13 +1,19 @@
 package com.example.project1;
 
+import static com.google.android.gms.location.Priority.PRIORITY_BALANCED_POWER_ACCURACY;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,8 +32,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapsFragment extends Fragment {
     private static final String TAG = "MapsFragment";
@@ -42,6 +53,9 @@ public class MapsFragment extends Fragment {
     private static final float DEFAULT_ZOOM = 15f;
     NavController navController;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    EditText search_map_edit_text;
+    ImageView search_map_button;
+    ImageView my_location_icon;
 
     @Nullable
     @Override
@@ -55,6 +69,9 @@ public class MapsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(getView());
+        search_map_edit_text = getView().findViewById(R.id.search_map_edit_text);
+        search_map_button = getView().findViewById(R.id.search_map_button);
+        my_location_icon = getView().findViewById(R.id.my_location_icon);
         getLocationPermission();
     }
 
@@ -135,9 +152,53 @@ public class MapsFragment extends Fragment {
                 }
                 mMap.setMyLocationEnabled(true);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                setupMapFunctions();
             }
         }
     };
+
+    private void setupMapFunctions(){
+        Log.d(TAG, "init: initializing");
+
+        search_map_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                geoLocate();
+            }
+        });
+
+        my_location_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: clicked gps icon");
+                getDeviceLocation();
+            }
+        });
+    }
+
+    private void geoLocate(){
+        Log.d(TAG, "geoLocate: geolocating");
+
+        String searchString = search_map_edit_text.getText().toString();
+
+        Geocoder geocoder = new Geocoder(getActivity());
+        List<Address> list = new ArrayList<>();
+        try{
+            list = geocoder.getFromLocationName(searchString, 1);
+        }catch (IOException e){
+            Log.e(TAG, "geoLocate: IOException: " + e.getMessage() );
+        }
+
+        if(list.size() > 0){
+            Address address = list.get(0);
+
+            Log.d(TAG, "geoLocate: found a location: " + address.toString());
+            //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
+
+            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM,
+                    address.getAddressLine(0));
+        }
+    }
 
     private void getDeviceLocation(){
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
@@ -147,7 +208,7 @@ public class MapsFragment extends Fragment {
         try{
             if(mLocationPermissionsGranted){
 
-                final Task location = mFusedLocationProviderClient.getLastLocation();
+                final Task location = mFusedLocationProviderClient.getCurrentLocation(PRIORITY_BALANCED_POWER_ACCURACY,null);
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
@@ -156,7 +217,7 @@ public class MapsFragment extends Fragment {
                             Location currentLocation = (Location) task.getResult();
 
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                    DEFAULT_ZOOM);
+                                    DEFAULT_ZOOM, "My Location");
 
                         }else{
                             Log.d(TAG, "onComplete: current location is null");
@@ -170,9 +231,15 @@ public class MapsFragment extends Fragment {
         }
     }
 
-    private void moveCamera(LatLng latLng, float zoom){
+    private void moveCamera(LatLng latLng, float zoom, String title){
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+        if(!title.equals("My Location")){
+            MarkerOptions options = new MarkerOptions()
+                    .position(latLng)
+                    .title(title);
+            mMap.addMarker(options);
+        }
     }
 
 }
