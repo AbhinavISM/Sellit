@@ -137,6 +137,8 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             mMap = googleMap;
+            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+//            mMap.setTrafficEnabled(true);
             if (mLocationPermissionsGranted) {
                 getDeviceLocation();
                 if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -152,6 +154,17 @@ public class MapsFragment extends Fragment {
                 }
                 mMap.setMyLocationEnabled(true);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+                    @Override
+                    public void onMapLongClick(@NonNull LatLng latLng) {
+                        //we have latlng so store it somewhere for select this location option
+                        mMap.clear();
+                        MarkerOptions options = new MarkerOptions()
+                                .position(latLng)
+                                .title("selected location");
+                        mMap.addMarker(options);
+                    }
+                });
                 setupMapFunctions();
             }
         }
@@ -163,6 +176,8 @@ public class MapsFragment extends Fragment {
         search_map_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //use this to clear all markers from map
+                mMap.clear();
                 geoLocate();
             }
         });
@@ -191,7 +206,6 @@ public class MapsFragment extends Fragment {
 
         if(list.size() > 0){
             Address address = list.get(0);
-
             Log.d(TAG, "geoLocate: found a location: " + address.toString());
             //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
 
@@ -232,6 +246,7 @@ public class MapsFragment extends Fragment {
     }
 
     private void moveCamera(LatLng latLng, float zoom, String title){
+        //we have latlng so store it somewhere for select this location option
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
         if(!title.equals("My Location")){
