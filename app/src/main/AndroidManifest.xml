@@ -34,18 +34,6 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".update_delete_activity"
-            android:exported="false" />
-        <activity
-            android:name=".this_user"
-            android:exported="false" />
-        <activity
-            android:name=".new_property"
-            android:exported="false" />
-        <activity
-            android:name=".recycler_activity"
-            android:exported="false" />
-        <activity
             android:name=".register"
             android:exported="false" />
         <activity
