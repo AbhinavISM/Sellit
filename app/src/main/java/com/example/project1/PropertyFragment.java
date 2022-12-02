@@ -270,7 +270,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
 
     @Override
     public void startmap() {
-        NavDirections action = PropertyFragmentDirections.actionPropertyFragmentToMapsFragment();
-        navController.navigate(action);
+//        NavDirections action = PropertyFragmentDirections.actionPropertyFragmentToMapsFragment();
+//        navController.navigate(action);
     }
 }

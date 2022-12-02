@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this,R.id.host_fragment_container);
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
 
-
     }
 
 //    private void replaceFragment(Fragment selected_fragment) {

@@ -10,15 +10,34 @@ public class Property_model_class implements Parcelable {
     private String Price;
     private String Details;
     private String Offeredby;
+
+    public String getLat() {
+        return Lat;
+    }
+
+    public void setLat(String lat) {
+        Lat = lat;
+    }
+
+    public String getLng() {
+        return Lng;
+    }
+
+    public void setLng(String lng) {
+        Lng = lng;
+    }
+
     private String Property_image;
     private String property_ID;
     private String property_ID_particular;
+    private String Lat;
+    private String Lng;
 
     public Property_model_class(){
 
     }
 
-    public Property_model_class(String phone_number, String adress, String price, String details, String offeredby, String property_image , String property_ID, String property_ID_particular) {
+    public Property_model_class(String phone_number, String adress, String price, String details, String offeredby, String property_image , String property_ID, String property_ID_particular, String lat, String lng) {
         Phone_number = phone_number;
         Adress = adress;
         Price = price;
@@ -27,6 +46,8 @@ public class Property_model_class implements Parcelable {
         Property_image = property_image;
         this.property_ID = property_ID;
         this.property_ID_particular = property_ID_particular;
+        Lat = lat;
+        Lng = lng;
     }
 
     protected Property_model_class(Parcel in) {
@@ -38,6 +59,8 @@ public class Property_model_class implements Parcelable {
         Property_image = in.readString();
         property_ID = in.readString();
         property_ID_particular = in.readString();
+        Lat = in.readString();
+        Lng = in.readString();
     }
 
     public static final Creator<Property_model_class> CREATOR = new Creator<Property_model_class>() {
@@ -131,5 +154,7 @@ public class Property_model_class implements Parcelable {
         parcel.writeString(Property_image);
         parcel.writeString(property_ID);
         parcel.writeString(property_ID_particular);
+        parcel.writeString(Lat);
+        parcel.writeString(Lng);
     }
 }

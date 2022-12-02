@@ -56,8 +56,8 @@ public class PropertyFragmentViewModel extends ViewModel implements Propertydata
         propertyFragmentRepository.delete_property_repo(image_url,property_ID_particular,property_ID);
     }
 
-    public void add_property(String adress, String phoneno, String details, String price,String image_name, Uri image_uri){
-        propertyFragmentRepository.add_property_repo(adress,phoneno,details,price,image_name,image_uri);
+    public void add_property(String adress, String phoneno, String details, String price,String image_name, Uri image_uri, String Lat, String Lng){
+        propertyFragmentRepository.add_property_repo(adress,phoneno,details,price,image_name,image_uri, Lat, Lng);
     }
 
     public void setDataForPropertyFragmentToEditFragment(int position) {
@@ -68,7 +68,9 @@ public class PropertyFragmentViewModel extends ViewModel implements Propertydata
                 property_data_list_vm.getValue().get(position).getOfferedby(),
                 property_data_list_vm.getValue().get(position).getProperty_image(),
                 property_data_list_vm.getValue().get(position).getProperty_ID(),
-                property_data_list_vm.getValue().get(position).getProperty_ID_paticular());
+                property_data_list_vm.getValue().get(position).getProperty_ID_paticular(),
+                property_data_list_vm.getValue().get(position).getLat(),
+                property_data_list_vm.getValue().get(position).getLng());
         tosendforedit_mutable_live = new MutableLiveData<>();
         tosendforedit_mutable_live.setValue(tosendforedit);
         adapterpositionforpropertyfragmnettoeditfragment = position;

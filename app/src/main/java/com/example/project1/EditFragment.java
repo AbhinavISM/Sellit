@@ -39,6 +39,8 @@ public class EditFragment extends Fragment {
     String image_url;
     String property_ID;
     String property_ID_particular;
+    String lat;
+    String lng;
     int adapter_position;
     FragmentEditBinding fragmentEditBinding;
 //    Button update_button;
@@ -88,6 +90,8 @@ public class EditFragment extends Fragment {
                 image_url = recieved_data.getProperty_image();
                 property_ID = recieved_data.getProperty_ID();
                 property_ID_particular = recieved_data.getProperty_ID_particular();
+                lat = recieved_data.getLat();
+                lng = recieved_data.getLng();
             }
         });
         adapter_position = propertyFragmentViewModel.getAdapterpositionforpropertyfragmnettoeditfragment();
@@ -115,6 +119,8 @@ public class EditFragment extends Fragment {
                 map.put("property_image",image_url);
                 map.put("property_ID",property_ID);
                 map.put("property_ID_particular",property_ID_particular);
+                map.put("lat",lat);
+                map.put("lng", lng);
                 propertyFragmentViewModel.update_property(edit_image_uri,image_name,map);
                 RoomViewModel.update_property_offline(edit_image_uri,image_name,map,adapter_position);
             }

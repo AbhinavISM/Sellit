@@ -41,8 +41,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsFragment extends Fragment {
-    private static final String TAG = "MapsFragment";
+public class ShowLocationFragment extends Fragment {
+
 
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -54,33 +54,43 @@ public class MapsFragment extends Fragment {
     private static final float DEFAULT_ZOOM = 15f;
     NavController navController;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    EditText search_map_edit_text;
-    ImageView search_map_button;
-    ImageView my_location_icon;
-    Button select_location_button;
-    String Lat = "";
-    String Lng = "";
-    @Nullable
+    EditText search_map_edit_text2;
+    ImageView search_map_button2;
+    ImageView my_location_icon2;
+    Button property_location;
+    String Lat;
+    String Lng;
+    private String TAG = "ShowLocationFragment";
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_maps, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_show_location, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(getView());
-        search_map_edit_text = getView().findViewById(R.id.search_map_edit_text);
-        search_map_button = getView().findViewById(R.id.search_map_button);
-        my_location_icon = getView().findViewById(R.id.my_location_icon);
-        select_location_button = getView().findViewById(R.id.select_location_button);
-        getLocationPermission();
+        search_map_edit_text2 = getView().findViewById(R.id.search_map_edit_text_2);
+        search_map_button2 = getView().findViewById(R.id.search_map_button_2);
+        my_location_icon2 = getView().findViewById(R.id.my_location_icon_2);
+        property_location = getView().findViewById(R.id.show_property_location_button);
+        if (getArguments() != null) {
+            ShowLocationFragmentArgs showLocationFragmentArgs = ShowLocationFragmentArgs.fromBundle(getArguments());
+            Lat = showLocationFragmentArgs.getLat();
+            Lng = showLocationFragmentArgs.getLng();
+            getLocationPermission();
+        } else {
+            Toast.makeText(getActivity(), "failed to get location", Toast.LENGTH_SHORT).show();
+            NavDirections action = ShowLocationFragmentDirections.actionShowLocationFragmentToHomeFragment();
+            navController.navigate(action);
+        }
+
     }
 
     private void getLocationPermission() {
-        Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 
@@ -95,7 +105,6 @@ public class MapsFragment extends Fragment {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Log.d(TAG, "onRequestPermissionsResult: called.");
         mLocationPermissionsGranted = false;
 
         switch (requestCode) {
@@ -105,7 +114,7 @@ public class MapsFragment extends Fragment {
                         if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                             mLocationPermissionsGranted = false;
                             Log.d(TAG, "onRequestPermissionsResult: permission failed");
-                            NavDirections action = MapsFragmentDirections.actionMapsFragmentToAddFragment("","");
+                            NavDirections action = ShowLocationFragmentDirections.actionShowLocationFragmentToHomeFragment();
                             navController.navigate(action);
                             return;
                         }
@@ -119,7 +128,7 @@ public class MapsFragment extends Fragment {
         }
     }
 
-    void initMap() {
+    private void initMap() {
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
@@ -128,25 +137,13 @@ public class MapsFragment extends Fragment {
     }
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
-
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
         @Override
-        public void onMapReady(GoogleMap googleMap) {
+        public void onMapReady(@NonNull GoogleMap googleMap) {
+            Toast.makeText(getActivity(), "map ready", Toast.LENGTH_SHORT).show();
             mMap = googleMap;
             mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-//            mMap.setTrafficEnabled(true);
             if (mLocationPermissionsGranted) {
-                getDeviceLocation();
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                        ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
                     // here to request the missing permissions, and then overriding
@@ -156,19 +153,25 @@ public class MapsFragment extends Fragment {
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
+//                MarkerOptions options1 = new MarkerOptions()
+//                        .position(new LatLng(Double.parseDouble(Lat),Double.parseDouble(Lng)))
+//                                .title("property");
+//                mMap.addMarker(options1);
+
+                //move camera to the property
+                moveCamera(new LatLng(Double.parseDouble(Lat),Double.parseDouble(Lng)),DEFAULT_ZOOM,"property");
+
                 mMap.setMyLocationEnabled(true);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
                 mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
                     @Override
                     public void onMapLongClick(@NonNull LatLng latLng) {
                         //we have latlng so store it somewhere for select this location option
-                        Lat = String.valueOf(latLng.latitude);
-                        Lng = String.valueOf(latLng.longitude);
                         mMap.clear();
-                        MarkerOptions options = new MarkerOptions()
+                        MarkerOptions options2 = new MarkerOptions()
                                 .position(latLng)
                                 .title("selected location");
-                        mMap.addMarker(options);
+                        mMap.addMarker(options2);
                     }
                 });
                 setupMapFunctions();
@@ -176,19 +179,16 @@ public class MapsFragment extends Fragment {
         }
     };
 
-    private void setupMapFunctions(){
-        Log.d(TAG, "init: initializing");
-
-        search_map_button.setOnClickListener(new View.OnClickListener() {
+    private void setupMapFunctions() {
+        search_map_button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //use this to clear all markers from map
-                mMap.clear();
                 geoLocate();
             }
         });
 
-        my_location_icon.setOnClickListener(new View.OnClickListener() {
+        my_location_icon2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked gps icon");
@@ -196,36 +196,12 @@ public class MapsFragment extends Fragment {
             }
         });
 
-        select_location_button.setOnClickListener(new View.OnClickListener() {
+        property_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            NavDirections action = MapsFragmentDirections.actionMapsFragmentToAddFragment(Lat,Lng);
-            navController.navigate(action);
+                moveCamera(new LatLng(Double.parseDouble(Lat),Double.parseDouble(Lng)),DEFAULT_ZOOM,"property");
             }
         });
-    }
-
-    private void geoLocate(){
-        Log.d(TAG, "geoLocate: geolocating");
-
-        String searchString = search_map_edit_text.getText().toString();
-
-        Geocoder geocoder = new Geocoder(getActivity());
-        List<Address> list = new ArrayList<>();
-        try{
-            list = geocoder.getFromLocationName(searchString, 1);
-        }catch (IOException e){
-            Log.e(TAG, "geoLocate: IOException: " + e.getMessage() );
-        }
-
-        if(list.size() > 0){
-            Address address = list.get(0);
-            Log.d(TAG, "geoLocate: found a location: " + address.toString());
-            //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
-
-            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM,
-                    address.getAddressLine(0));
-        }
     }
 
     private void getDeviceLocation(){
@@ -259,6 +235,30 @@ public class MapsFragment extends Fragment {
         }
     }
 
+    private void geoLocate(){
+        Log.d(TAG, "geoLocate: geolocating");
+
+        String searchString = search_map_edit_text2.getText().toString();
+
+        Geocoder geocoder = new Geocoder(getActivity());
+        List<Address> list = new ArrayList<>();
+        try{
+            list = geocoder.getFromLocationName(searchString, 1);
+        }catch (IOException e){
+            Log.e(TAG, "geoLocate: IOException: " + e.getMessage() );
+        }
+
+        if(list.size() > 0){
+            Address address = list.get(0);
+            Log.d(TAG, "geoLocate: found a location: " + address.toString());
+            //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
+
+            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM,
+                    address.getAddressLine(0));
+        }
+    }
+
+
     private void moveCamera(LatLng latLng, float zoom, String title){
         //we have latlng so store it somewhere for select this location option
         Lat = String.valueOf(latLng.latitude);
@@ -267,11 +267,10 @@ public class MapsFragment extends Fragment {
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
         if(!title.equals("My Location")){
-            MarkerOptions options = new MarkerOptions()
+            MarkerOptions options3 = new MarkerOptions()
                     .position(latLng)
                     .title(title);
-            mMap.addMarker(options);
+            mMap.addMarker(options3);
         }
     }
-
 }

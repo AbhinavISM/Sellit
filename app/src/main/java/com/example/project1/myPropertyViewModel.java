@@ -16,12 +16,12 @@ public class myPropertyViewModel extends AndroidViewModel {
 
     public myPropertyViewModel(@NonNull Application application) {
         super(application);
-        mypropertyRepository = new myPropertyRepository(application);
+        mypropertyRepository = myPropertyRepository.init(application);
         offline_property_list = mypropertyRepository.getAllmyProperty();
     }
 
-    public void insert_property_offline(String phoneno, String adress, String price, String details,String image_name, Uri image_uri){
-        mypropertyRepository.insert_property_offline(phoneno,adress,price,details,image_name,image_uri);
+    public void insert_property_offline(String phoneno, String adress, String price, String details,String image_name, Uri image_uri, String Lat, String Lng){
+        mypropertyRepository.insert_property_offline(phoneno,adress,price,details,image_name,image_uri, Lat, Lng);
     }
 
     public void update_property_offline(Uri edit_image_uri, String image_name, Map<String,Object> map, int adapter_position){

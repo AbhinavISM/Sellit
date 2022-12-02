@@ -96,7 +96,7 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
                 String offerdbydata = hetero_entity_list.get(position).getOfferedby();
                 String imagedata = hetero_entity_list.get(position).getProperty_image();
                 ((user_property_case_ViewHolder)holder).propertyLayoutBinding1.setPropertyModelClassData(
-                        new Property_model_class(phnodata, adressdata,pricedata,detailsdata,offerdbydata,imagedata,"dummy", "dummy"));
+                        new Property_model_class(phnodata, adressdata,pricedata,detailsdata,offerdbydata,imagedata,"dummy", "dummy", "dummy", "dummy"));
                 break;
         }
     }

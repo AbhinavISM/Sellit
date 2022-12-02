@@ -16,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 
 public class AddFragment extends Fragment {
@@ -23,6 +26,10 @@ public class AddFragment extends Fragment {
     ImageView addimage;
     PropertyFragmentViewModel propertyFragmentViewModel;
     myPropertyViewModel RoomViewModel;
+    String Lat;
+    String Lng;
+    NavController navController;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,6 +48,16 @@ public class AddFragment extends Fragment {
         TextView addprice = getView().findViewById(R.id.add_price_textview_fragment);
         addimage = getView().findViewById(R.id.Add_image_view_button_fragment);
         Button addpropbutton = getView().findViewById(R.id.Add_property_button_fragment);
+        TextView OpenMapsTextView = getView().findViewById(R.id.open_maps_text_view);
+        navController = Navigation.findNavController(getView());
+
+        OpenMapsTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavDirections action = AddFragmentDirections.actionAddFragmentToMapsFragment();
+                navController.navigate(action);
+            }
+        });
 
         addimage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,14 +72,19 @@ public class AddFragment extends Fragment {
         addpropbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(getArguments()!=null){
+                    AddFragmentArgs addFragmentArgs = AddFragmentArgs.fromBundle(getArguments());
+                    Lat = addFragmentArgs.getLatitude();
+                    Lng = addFragmentArgs.getLongitude();
+                }
                 String adress = addadress.getText().toString();
                 String phoneno = addphoneno.getText().toString();
                 String details = adddetails.getText().toString();
                 String price = addprice.getText().toString();
                 String image_name = System.currentTimeMillis()+"."+getExtension(image_uri);
                 String image_name_for_room = System.currentTimeMillis()+"."+getExtension(image_uri);
-                propertyFragmentViewModel.add_property(adress,phoneno,details,price,image_name,image_uri);
-                RoomViewModel.insert_property_offline(phoneno,adress,price,details,image_name_for_room,image_uri);
+                propertyFragmentViewModel.add_property(adress,phoneno,details,price,image_name,image_uri,Lat,Lng);
+                RoomViewModel.insert_property_offline(phoneno,adress,price,details,image_name_for_room,image_uri,Lat,Lng);
             }
         });
     }

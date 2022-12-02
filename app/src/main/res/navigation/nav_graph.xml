@@ -9,12 +9,35 @@
         android:id="@+id/addFragment"
         android:name="com.example.project1.AddFragment"
         android:label="fragment_add"
-        tools:layout="@layout/fragment_add" />
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_addFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/addFragment"
+            app:popUpToInclusive="false" />
+        <argument
+            android:name="Latitude"
+            app:argType="string" />
+        <argument
+            android:name="Longitude"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.project1.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_showLocationFragment"
+            app:destination="@id/showLocationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/propertyFragment"
@@ -23,10 +46,11 @@
         tools:layout="@layout/fragment_property" >
         <action
             android:id="@+id/action_propertyFragment_to_editFragment"
-            app:destination="@id/editFragment" />
-        <action
-            android:id="@+id/action_propertyFragment_to_mapsFragment"
-            app:destination="@id/mapsFragment" />
+            app:destination="@id/editFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/editFragment"
@@ -39,9 +63,32 @@
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" >
         <action
-            android:id="@+id/action_mapsFragment_to_propertyFragment"
-            app:destination="@id/propertyFragment"
-            app:popUpTo="@id/propertyFragment"
+            android:id="@+id/action_mapsFragment_to_addFragment"
+            app:destination="@id/addFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/addFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/showLocationFragment"
+        android:name="com.example.project1.ShowLocationFragment"
+        android:label="fragment_show_location"
+        tools:layout="@layout/fragment_show_location" >
+        <action
+            android:id="@+id/action_showLocationFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <argument
+            android:name="Lat"
+            app:argType="string" />
+        <argument
+            android:name="Lng"
+            app:argType="string" />
     </fragment>
 </navigation>

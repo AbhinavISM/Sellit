@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapsFragment">
+    tools:context=".ShowLocationFragment">
 
     <fragment
-        android:id="@+id/map"
+        android:id="@+id/map_2"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/search_bar_card"
+        android:id="@+id/search_bar_card_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -27,16 +27,16 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/search_map_edit_text"
+                android:id="@+id/search_map_edit_text_2"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginLeft="16dp"
-                android:layout_toLeftOf="@id/search_map_button"
+                android:layout_toLeftOf="@id/search_map_button_2"
                 android:background="@color/white"
                 android:hint="Search Property" />
 
             <ImageView
-                android:id="@+id/search_map_button"
+                android:id="@+id/search_map_button_2"
                 android:layout_width="36dp"
                 android:layout_height="48dp"
                 android:layout_alignParentRight="true"
@@ -49,10 +49,10 @@
     </androidx.cardview.widget.CardView>
 
     <ImageView
-        android:id="@+id/my_location_icon"
+        android:id="@+id/my_location_icon_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/search_bar_card"
+        android:layout_alignBottom="@id/search_bar_card_2"
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="-36dp"
@@ -60,14 +60,14 @@
         android:clickable="true"/>
 
     <Button
-        android:id="@+id/select_location_button"
-        android:text="Select"
+        android:id="@+id/show_property_location_button"
+        android:text="property"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="-48dp"
-        android:layout_alignBottom="@+id/my_location_icon"
+        android:layout_alignBottom="@+id/my_location_icon_2"
         />
 
 </RelativeLayout>

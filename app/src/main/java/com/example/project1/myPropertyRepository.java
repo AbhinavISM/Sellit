@@ -27,16 +27,28 @@ import java.util.Map;
 import java.util.Objects;
 
 public class myPropertyRepository {
-    private myPropertydao mypropertydao;
-    private LiveData<List<myPropertyEntity>> offline_property_list_repo;
+    private static myPropertydao mypropertydao;
+    private static LiveData<List<myPropertyEntity>> offline_property_list_repo;
+    private static myPropertyRepository instance;
 
-    public myPropertyRepository(Context context){
-        myPropertydb mypropertydb = myPropertydb.getInstance(context);
-        mypropertydao = mypropertydb.my_property_dao();
-        offline_property_list_repo = mypropertydao.getAllmyProperty();
+//    public myPropertyRepository(Context context){
+//        myPropertydb mypropertydb = myPropertydb.getInstance(context);
+//        mypropertydao = mypropertydb.my_property_dao();
+//        offline_property_list_repo = mypropertydao.getAllmyProperty();
+//    }
+
+    public static myPropertyRepository init(Context application){
+        // cant we just use a static block here?
+        if(instance == null){
+            instance = new myPropertyRepository();
+            myPropertydb mypropertydb = myPropertydb.getInstance(application);
+            mypropertydao = mypropertydb.my_property_dao();
+            offline_property_list_repo = mypropertydao.getAllmyProperty();
+        }
+        return instance;
     }
 
-    public void insert_property_offline(String phoneno, String adress, String price, String details, String image_name, Uri image_uri){
+    public void insert_property_offline(String phoneno, String adress, String price, String details, String image_name, Uri image_uri, String Lat, String Lng){
         final String[] name = new String[1];
         FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -56,7 +68,7 @@ public class myPropertyRepository {
                     FirebaseStorage.getInstance().getReference("uploads").child(image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            mypropertydao.insert_property_offline(new myPropertyEntity(phoneno,adress,price,details,name[0],String.valueOf(uri), user_property_case, "","",""));
+                            mypropertydao.insert_property_offline(new myPropertyEntity(phoneno,adress,price,details,name[0],String.valueOf(uri), user_property_case, "","","",Lat,Lng));
                             Log.d("hum jeet gaye", "room");
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -73,12 +85,12 @@ public class myPropertyRepository {
             }
         });
     }
-    public void insert_property_since_room_khali_tha(String phoneno, String adress, String price, String details, String url, String offered_by){
-        mypropertydao.insert_property_offline(new myPropertyEntity(phoneno,adress,price,details,offered_by,url, user_property_case,"","",""));
+    public void insert_property_since_room_khali_tha(String phoneno, String adress, String price, String details, String url, String offered_by, String Lat, String Lng){
+        mypropertydao.insert_property_offline(new myPropertyEntity(phoneno,adress,price,details,offered_by,url, user_property_case,"","","",Lat,Lng));
     }
 
     public void insert_profile_since_room_khali_tha(String username, String useremail, String profile_image){
-        mypropertydao.insert_property_offline(new myPropertyEntity("","","","","","",user_profile_case,username,useremail,profile_image));
+        mypropertydao.insert_property_offline(new myPropertyEntity("","","","","","",user_profile_case,username,useremail,profile_image,"",""));
     }
     public void roomKhaliHainBharDeBhai(){
 //        property_data_list_repo = new ArrayList<>();
@@ -123,7 +135,9 @@ public class myPropertyRepository {
                                                                 property_model_data.getPrice(),
                                                                 property_model_data.getDetails(),
                                                                 property_model_data.getProperty_image(),
-                                                                property_model_data.getOfferedby());
+                                                                property_model_data.getOfferedby(),
+                                                                property_model_data.getLat(),
+                                                                property_model_data.getLng());
                                                     }
 //                                                    propertydataloadlistener.onPropertydataloaded(property_data_list_repo);
                                                 }
@@ -166,7 +180,9 @@ public class myPropertyRepository {
                                         user_property_case,
                                         "",
                                         "",
-                                        "");
+                                        "",
+                                        String.valueOf(map.getOrDefault("lat","")),
+                                        String.valueOf(map.getOrDefault("lng","")));
                                 to_update_entity.setId(offline_property_list_repo.getValue().get(adapter_position).getId());
                                 mypropertydao.update_property_offline(to_update_entity);
                             }
@@ -188,7 +204,9 @@ public class myPropertyRepository {
                     user_property_case,
                     "",
                     "",
-                    "");
+                    "",
+                    String.valueOf(map.getOrDefault("lat","")),
+                    String.valueOf(map.getOrDefault("lng","")));
             to_update_entity.setId(offline_property_list_repo.getValue().get(adapter_position).getId());
             mypropertydao.update_property_offline(to_update_entity);
         }

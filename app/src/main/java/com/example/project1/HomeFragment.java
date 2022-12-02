@@ -13,6 +13,9 @@ import androidx.databinding.BindingAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +31,7 @@ public class HomeFragment extends Fragment implements recyclerInterface{
     LinearLayoutManager home_reycler_manager;
     property_adapter home_recycler_adapter;
     private HomeFragmentViewModel homeFragmentViewModel;
+    NavController navController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,6 +43,7 @@ public class HomeFragment extends Fragment implements recyclerInterface{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(getView());
         homeFragmentViewModel = new ViewModelProvider(this).get(HomeFragmentViewModel.class);
         homeFragmentViewModel.initHomeFragmentViewModel();
         init_home_recycler();
@@ -89,7 +94,9 @@ public class HomeFragment extends Fragment implements recyclerInterface{
     @Override
     public void onItemClick(int position) {
         Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
-        return;
+        List<Property_model_class> data = homeFragmentViewModel.get_home_data_list_vm().getValue();
+        NavDirections action = HomeFragmentDirections.actionHomeFragmentToShowLocationFragment(data.get(position).getLat(),data.get(position).getLng());
+        navController.navigate(action);
     }
 
     @BindingAdapter("android:loadImage")

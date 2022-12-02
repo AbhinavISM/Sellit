@@ -45,7 +45,7 @@ public class property_adapter extends RecyclerView.Adapter<property_adapter.View
         String detailsdata = datalist.get(position).getDetails();
         String offerdbydata = datalist.get(position).getOfferedby();
         String imagedata = datalist.get(position).getProperty_image();
-        holder.propertyLayoutBinding.setPropertyModelClassData(new Property_model_class(phnodata,adressdata,pricedata,detailsdata,offerdbydata,imagedata,"dummy","dummy"));
+        holder.propertyLayoutBinding.setPropertyModelClassData(new Property_model_class(phnodata,adressdata,pricedata,detailsdata,offerdbydata,imagedata,"dummy","dummy","dummy","dummy"));
         holder.propertyLayoutBinding.executePendingBindings();
     }
 

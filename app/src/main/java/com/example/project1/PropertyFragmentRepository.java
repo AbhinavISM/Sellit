@@ -77,7 +77,7 @@ public class PropertyFragmentRepository {
                                                     property_data_list_repo.add(new Hetero_model_for_userprofile(user_profile_case,username[0],useremail[0],user_profile_link[0]));
                                                     for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
                                                         Property_model_class property_model_data = dataSnapshot.getValue(Property_model_class.class);
-                                                        property_data_list_repo.add(new Hetero_model_for_userprofile(property_model_data.getPhone_number(),property_model_data.getAdress(),property_model_data.getPrice(),property_model_data.getDetails(),property_model_data.getOfferedby(),property_model_data.getProperty_image(),property_model_data.getProperty_ID(),property_model_data.getProperty_ID_particular()));
+                                                        property_data_list_repo.add(new Hetero_model_for_userprofile(property_model_data.getPhone_number(),property_model_data.getAdress(),property_model_data.getPrice(),property_model_data.getDetails(),property_model_data.getOfferedby(),property_model_data.getProperty_image(),property_model_data.getProperty_ID(),property_model_data.getProperty_ID_particular(),property_model_data.getLat(),property_model_data.getLng()));
                                                     }
                                                     propertydataloadlistener.onPropertydataloaded(property_data_list_repo);
                                                 }
@@ -238,7 +238,7 @@ public class PropertyFragmentRepository {
         });
     }
 
-    public void add_property_repo(String adress, String phoneno, String details, String price,String image_name, Uri image_uri){
+    public void add_property_repo(String adress, String phoneno, String details, String price,String image_name, Uri image_uri, String Lat, String Lng){
 
         final String[] name = new String[1];
         FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -264,7 +264,7 @@ public class PropertyFragmentRepository {
                             Log.d("line 1", "success");
                             String property_ID_particular = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("property added by this user").push().getKey();
                             Log.d("line 2", "success");
-                            new_property_info property_object = new new_property_info(phoneno,adress,price,details, name[0],String.valueOf(uri),property_ID,property_ID_particular);
+                            new_property_info property_object = new new_property_info(phoneno,adress,price,details, name[0],String.valueOf(uri),property_ID,property_ID_particular,Lat,Lng);
                             Log.d("line 3", "success");
                             FirebaseDatabase.getInstance().getReference("property added by all users").child(property_ID).setValue(property_object);
                             Log.d("line 4", "success");

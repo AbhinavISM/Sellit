@@ -17,12 +17,31 @@ public class new_property_info {
     private String Property_image;
     private String property_ID;
     private String property_ID_particular;
+    private String Lat;
+
+    public String getLat() {
+        return Lat;
+    }
+
+    public void setLat(String lat) {
+        Lat = lat;
+    }
+
+    public String getLng() {
+        return Lng;
+    }
+
+    public void setLng(String lng) {
+        Lng = lng;
+    }
+
+    private String Lng;
 
     public new_property_info(){
 
     }
 
-    public new_property_info(String phone_number, String adress, String price, String details, String offeredby, String property_image, String property_ID, String property_ID_particular) {
+    public new_property_info(String phone_number, String adress, String price, String details, String offeredby, String property_image, String property_ID, String property_ID_particular, String lat, String lng) {
         Phone_number = phone_number;
         Adress = adress;
         Price = price;
@@ -31,6 +50,8 @@ public class new_property_info {
         Property_image = property_image;
         this.property_ID = property_ID;
         this.property_ID_particular = property_ID_particular;
+        Lat = lat;
+        Lng = lng;
     }
 
     public String getProperty_ID() {
