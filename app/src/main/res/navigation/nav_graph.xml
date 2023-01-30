@@ -84,26 +84,4 @@
             android:name="calledFrom"
             app:argType="string" />
     </fragment>
-    <fragment
-        android:id="@+id/showLocationFragment"
-        android:name="com.example.project1.ShowLocationFragment"
-        android:label="fragment_show_location"
-        tools:layout="@layout/fragment_show_location" >
-        <action
-            android:id="@+id/action_showLocationFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
-        <argument
-            android:name="Lat"
-            app:argType="string" />
-        <argument
-            android:name="Lng"
-            app:argType="string" />
-        <argument
-            android:name="calledFrom"
-            app:argType="string" />
-    </fragment>
 </navigation>
