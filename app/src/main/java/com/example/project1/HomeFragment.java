@@ -95,7 +95,9 @@ public class HomeFragment extends Fragment implements recyclerInterface{
     public void onItemClick(int position) {
         Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
         List<Property_model_class> data = homeFragmentViewModel.get_home_data_list_vm().getValue();
-        NavDirections action = HomeFragmentDirections.actionHomeFragmentToShowLocationFragment(data.get(position).getLat(),data.get(position).getLng());
+//        NavDirections action = HomeFragmentDirections.actionHomeFragmentToShowLocationFragment(data.get(position).getLat(),data.get(position).getLng());
+        NavDirections action = HomeFragmentDirections.actionHomeFragmentToMapsFragment(data.get(position).getLat(),data.get(position).getLng(),"HomeFragment");
+
         navController.navigate(action);
     }
 

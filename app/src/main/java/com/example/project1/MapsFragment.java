@@ -58,8 +58,9 @@ public class MapsFragment extends Fragment {
     ImageView search_map_button;
     ImageView my_location_icon;
     Button select_location_button;
-    String Lat = "";
-    String Lng = "";
+    String Lat;
+    String Lng;
+    String calledFrom;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -76,6 +77,13 @@ public class MapsFragment extends Fragment {
         search_map_button = getView().findViewById(R.id.search_map_button);
         my_location_icon = getView().findViewById(R.id.my_location_icon);
         select_location_button = getView().findViewById(R.id.select_location_button);
+        MapsFragmentArgs mapsFragmentArgs = MapsFragmentArgs.fromBundle(getArguments());
+        Lat = mapsFragmentArgs.getLat();
+        Lng = mapsFragmentArgs.getLng();
+        calledFrom = mapsFragmentArgs.getCalledFrom();
+        if(calledFrom == "HomeFragment"){
+            select_location_button.setText("Property");
+        }
         getLocationPermission();
     }
 
@@ -144,7 +152,10 @@ public class MapsFragment extends Fragment {
             mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 //            mMap.setTrafficEnabled(true);
             if (mLocationPermissionsGranted) {
-                getDeviceLocation();
+                if(calledFrom == "AddFragment"){
+                    getDeviceLocation();
+                }
+
                 if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                         ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
@@ -156,14 +167,19 @@ public class MapsFragment extends Fragment {
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
+                if(calledFrom == "HomeFragment"){
+                    moveCamera(new LatLng(Double.parseDouble(Lat),Double.parseDouble(Lng)),DEFAULT_ZOOM,"property");
+                }
                 mMap.setMyLocationEnabled(true);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
                 mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
                     @Override
                     public void onMapLongClick(@NonNull LatLng latLng) {
                         //we have latlng so store it somewhere for select this location option
-                        Lat = String.valueOf(latLng.latitude);
-                        Lng = String.valueOf(latLng.longitude);
+                        if(calledFrom == "AddFragment"){
+                            Lat = String.valueOf(latLng.latitude);
+                            Lng = String.valueOf(latLng.longitude);
+                        }
                         mMap.clear();
                         MarkerOptions options = new MarkerOptions()
                                 .position(latLng)
@@ -183,7 +199,7 @@ public class MapsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //use this to clear all markers from map
-                mMap.clear();
+//                mMap.clear();
                 geoLocate();
             }
         });
@@ -199,8 +215,12 @@ public class MapsFragment extends Fragment {
         select_location_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            NavDirections action = MapsFragmentDirections.actionMapsFragmentToAddFragment(Lat,Lng);
-            navController.navigate(action);
+                if(calledFrom == "AddFragment"){
+                    NavDirections action = MapsFragmentDirections.actionMapsFragmentToAddFragment(Lat,Lng);
+                    navController.navigate(action);
+                }else{
+                    moveCamera(new LatLng(Double.parseDouble(Lat),Double.parseDouble(Lng)),DEFAULT_ZOOM,"property");
+                }
             }
         });
     }
@@ -261,8 +281,10 @@ public class MapsFragment extends Fragment {
 
     private void moveCamera(LatLng latLng, float zoom, String title){
         //we have latlng so store it somewhere for select this location option
-        Lat = String.valueOf(latLng.latitude);
-        Lng = String.valueOf(latLng.longitude);
+        if(calledFrom == "AddFragment"){
+            Lat = String.valueOf(latLng.latitude);
+            Lng = String.valueOf(latLng.longitude);
+        }
 
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));

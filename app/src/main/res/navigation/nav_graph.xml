@@ -31,13 +31,16 @@
         android:name="com.example.project1.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
+<!--        <action-->
+<!--            android:id="@+id/action_homeFragment_to_showLocationFragment"-->
+<!--            app:destination="@id/showLocationFragment"-->
+<!--            app:enterAnim="@android:anim/fade_in"-->
+<!--            app:exitAnim="@android:anim/fade_out"-->
+<!--            app:popEnterAnim="@android:anim/fade_in"-->
+<!--            app:popExitAnim="@android:anim/fade_out" />-->
         <action
-            android:id="@+id/action_homeFragment_to_showLocationFragment"
-            app:destination="@id/showLocationFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            android:id="@+id/action_homeFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/propertyFragment"
@@ -70,7 +73,16 @@
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"
             app:popUpTo="@id/addFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
+        <argument
+            android:name="Lat"
+            app:argType="string" />
+        <argument
+            android:name="Lng"
+            app:argType="string" />
+        <argument
+            android:name="calledFrom"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/showLocationFragment"
@@ -89,6 +101,9 @@
             app:argType="string" />
         <argument
             android:name="Lng"
+            app:argType="string" />
+        <argument
+            android:name="calledFrom"
             app:argType="string" />
     </fragment>
 </navigation>

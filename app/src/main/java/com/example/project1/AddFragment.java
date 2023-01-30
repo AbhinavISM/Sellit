@@ -54,7 +54,7 @@ public class AddFragment extends Fragment {
         OpenMapsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavDirections action = AddFragmentDirections.actionAddFragmentToMapsFragment();
+                NavDirections action = AddFragmentDirections.actionAddFragmentToMapsFragment("", "", "AddFragment");
                 navController.navigate(action);
             }
         });
