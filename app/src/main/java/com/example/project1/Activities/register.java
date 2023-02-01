@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.project1.R;
+import com.example.project1.registered_user_info;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -63,7 +65,7 @@ public class register extends AppCompatActivity {
 //                                                    finish();
                                                     if(task.isSuccessful()){
                                                         Toast.makeText(register.this, "succesfullyregsitered", Toast.LENGTH_LONG).show();
-                                                        startActivity(new Intent(register.this,MainActivity.class));
+                                                        startActivity(new Intent(register.this, MainActivity.class));
                                                         finish();
                                                     }
                                                     else{

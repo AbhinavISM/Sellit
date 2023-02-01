@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.project1.Repository.myPropertyRepository;
+import com.example.project1.RoomDb.myPropertyEntity;
+
 import java.util.List;
 import java.util.Map;
 

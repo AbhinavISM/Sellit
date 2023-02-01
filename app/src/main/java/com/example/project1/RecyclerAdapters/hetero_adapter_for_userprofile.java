@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.RecyclerAdapters;
 
 import static com.example.project1.Hetero_model_for_userprofile.user_profile_case;
 import static com.example.project1.Hetero_model_for_userprofile.user_property_case;
@@ -14,6 +14,12 @@ import android.widget.PopupMenu;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project1.ListenerInterfaces.MapInterface;
+import com.example.project1.ListenerInterfaces.add_profile_pic_interface;
+import com.example.project1.ListenerInterfaces.recyclerInterface;
+import com.example.project1.Property_model_class;
+import com.example.project1.R;
+import com.example.project1.RoomDb.myPropertyEntity;
 import com.example.project1.databinding.PropertyLayoutBinding;
 import com.example.project1.databinding.UserProfileBinding;
 

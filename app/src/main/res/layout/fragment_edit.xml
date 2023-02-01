@@ -14,7 +14,7 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditFragment"
+    tools:context=".Fragments.EditFragment"
     android:background="@drawable/_0734561"
     android:fillViewport="true">
     <androidx.constraintlayout.widget.ConstraintLayout

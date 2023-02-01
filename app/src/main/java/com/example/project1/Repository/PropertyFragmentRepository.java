@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.Repository;
 
 import static com.example.project1.Hetero_model_for_userprofile.user_profile_case;
 
@@ -8,6 +8,11 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.project1.Hetero_model_for_userprofile;
+import com.example.project1.new_property_info;
+import com.example.project1.ListenerInterfaces.Propertydataloadlistener;
+import com.example.project1.Property_model_class;
+import com.example.project1.ListenerInterfaces.SuccessListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -307,6 +312,3 @@ public class PropertyFragmentRepository {
 
 }
 
-interface SuccessListener {
-    void onSuccess(String message);
-}

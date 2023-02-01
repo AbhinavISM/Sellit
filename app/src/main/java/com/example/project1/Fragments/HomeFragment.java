@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,12 +19,17 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project1.HomeFragmentViewModel;
+import com.example.project1.Property_model_class;
+import com.example.project1.R;
+import com.example.project1.RecyclerAdapters.property_adapter;
+import com.example.project1.ListenerInterfaces.recyclerInterface;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 
-public class HomeFragment extends Fragment implements recyclerInterface{
+public class HomeFragment extends Fragment implements recyclerInterface {
 
     List<Property_model_class> home_data_list;
     RecyclerView home_recyclerview;

@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.Fragments;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -24,6 +24,16 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project1.Hetero_model_for_userprofile;
+import com.example.project1.ListenerInterfaces.MapInterface;
+import com.example.project1.PropertyFragmentViewModel;
+import com.example.project1.R;
+import com.example.project1.ListenerInterfaces.add_profile_pic_interface;
+import com.example.project1.RecyclerAdapters.hetero_adapter_for_userprofile;
+import com.example.project1.Activities.login;
+import com.example.project1.RoomDb.myPropertyEntity;
+import com.example.project1.myPropertyViewModel;
+import com.example.project1.ListenerInterfaces.recyclerInterface;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
@@ -186,7 +196,7 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
         if (logout_successful) {
             Toast.makeText(getContext(),"logged out succesfully",Toast.LENGTH_LONG).show();
             RoomViewModel.allofflinedelete();
-            startActivity(new Intent(getActivity(),login.class));
+            startActivity(new Intent(getActivity(), login.class));
             getActivity().finish();
         }
         else{

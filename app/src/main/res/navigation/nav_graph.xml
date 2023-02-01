@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.example.project1.AddFragment"
+        android:name="com.example.project1.Fragments.AddFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.project1.HomeFragment"
+        android:name="com.example.project1.Fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
 <!--        <action-->
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/propertyFragment"
-        android:name="com.example.project1.PropertyFragment"
+        android:name="com.example.project1.Fragments.PropertyFragment"
         android:label="fragment_property"
         tools:layout="@layout/fragment_property" >
         <action
@@ -57,12 +57,12 @@
     </fragment>
     <fragment
         android:id="@+id/editFragment"
-        android:name="com.example.project1.EditFragment"
+        android:name="com.example.project1.Fragments.EditFragment"
         android:label="fragment_edit"
         tools:layout="@layout/fragment_edit" />
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.project1.MapsFragment"
+        android:name="com.example.project1.Fragments.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" >
         <action

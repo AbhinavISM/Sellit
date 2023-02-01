@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.Fragments;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -19,6 +19,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+
+import com.example.project1.PropertyFragmentViewModel;
+import com.example.project1.R;
+import com.example.project1.myPropertyViewModel;
 
 
 public class AddFragment extends Fragment {

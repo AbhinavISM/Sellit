@@ -6,17 +6,20 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.project1.ListenerInterfaces.Propertydataloadlistener;
+import com.example.project1.ListenerInterfaces.SuccessListener;
+import com.example.project1.Repository.PropertyFragmentRepository;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 import java.util.Map;
 
-public class PropertyFragmentViewModel extends ViewModel implements Propertydataloadlistener,SuccessListener{
+public class PropertyFragmentViewModel extends ViewModel implements Propertydataloadlistener, SuccessListener {
 
     private MutableLiveData<List<Hetero_model_for_userprofile>> property_data_list_vm;
     private PropertyFragmentRepository propertyFragmentRepository;
     private MutableLiveData<Property_model_class> tosendforedit_mutable_live;
-    MutableLiveData<String> successMessage = new MutableLiveData<String>();
+    public MutableLiveData<String> successMessage = new MutableLiveData<String>();
     int adapterpositionforpropertyfragmnettoeditfragment;
 
     public LiveData<List<Hetero_model_for_userprofile>> get_property_data_list_vm(){

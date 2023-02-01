@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.RoomDb;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.Fragments;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -20,7 +20,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.project1.PropertyFragmentViewModel;
+import com.example.project1.Property_model_class;
+import com.example.project1.R;
 import com.example.project1.databinding.FragmentEditBinding;
+import com.example.project1.myPropertyViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -53,7 +57,7 @@ public class EditFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        fragmentEditBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_edit,container,false);
+        fragmentEditBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit,container,false);
         View view = fragmentEditBinding.getRoot();
         fragmentEditBinding.setLifecycleOwner(this);
         propertyFragmentViewModel = new ViewModelProvider(getActivity()).get(PropertyFragmentViewModel.class);

@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.RecyclerAdapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project1.ListenerInterfaces.recyclerInterface;
+import com.example.project1.Property_model_class;
 import com.example.project1.databinding.PropertyLayoutBinding;
 
 import java.util.List;

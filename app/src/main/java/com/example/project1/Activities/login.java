@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.project1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -50,7 +51,7 @@ public class login extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
                                     Toast.makeText(login.this, "succesfully logged in", Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(login.this,MainActivity.class));
+                                    startActivity(new Intent(login.this, MainActivity.class));
                                     finish();
                                 }
                                 else{
