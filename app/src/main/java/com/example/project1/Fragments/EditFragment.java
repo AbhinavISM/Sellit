@@ -20,11 +20,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.project1.PropertyFragmentViewModel;
-import com.example.project1.Property_model_class;
+import com.example.project1.view_models.PropertyFragmentViewModel;
+import com.example.project1.data_classes.Property_model_class;
 import com.example.project1.R;
 import com.example.project1.databinding.FragmentEditBinding;
-import com.example.project1.myPropertyViewModel;
+import com.example.project1.view_models.myPropertyViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -33,12 +33,7 @@ import java.util.Map;
 
 public class EditFragment extends Fragment {
 
-//    EditText edit_phoneno;
-//    EditText edit_adress;
-//    EditText edit_price;
-//    EditText edit_details;
     String offered_by;
-//    ImageView edit_Image;
     Uri edit_image_uri;
     String image_url;
     String property_ID;
@@ -47,16 +42,12 @@ public class EditFragment extends Fragment {
     String lng;
     int adapter_position;
     FragmentEditBinding fragmentEditBinding;
-//    Button update_button;
-//    Button delete_button;
-
     PropertyFragmentViewModel propertyFragmentViewModel;
     myPropertyViewModel RoomViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         fragmentEditBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit,container,false);
         View view = fragmentEditBinding.getRoot();
         fragmentEditBinding.setLifecycleOwner(this);
@@ -70,24 +61,10 @@ public class EditFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        edit_phoneno = getView().findViewById(R.id.editphoneno_fragment);
-//        edit_Image = getView().findViewById(R.id.editimage_fragment);
-//        edit_adress = getView().findViewById(R.id.editadress_fragment);
-//        edit_price = getView().findViewById(R.id.editprice_fragment);
-//        edit_details = getView().findViewById(R.id.editdetails_fragment);
-//        update_button = getView().findViewById(R.id.updatebutton_fragment);
-//        delete_button = getView().findViewById(R.id.deletebutton_fragment);
-
         NavController navController = Navigation.findNavController(view);
-//        Property_model_class recieved_data = EditFragmentArgs.fromBundle(getArguments()).getDataForEditFragment();
-//        propertyFragmentViewModel = new ViewModelProvider(getActivity()).get(PropertyFragmentViewModel.class);
         propertyFragmentViewModel.getDataForPropertyFragmentToEditFragment().observe(getActivity(), new Observer<Property_model_class>() {
             @Override
             public void onChanged(Property_model_class recieved_data) {
-//                edit_phoneno.setText(recieved_data.getPhone_number());
-//                edit_adress.setText(recieved_data.getAdress());
-//                edit_price.setText(recieved_data.getPrice());
-//                edit_details.setText(recieved_data.getDetails());
                 fragmentEditBinding.setInflateEditFragmentData(recieved_data);
                 offered_by = recieved_data.getOfferedby();
                 edit_image_uri = null;

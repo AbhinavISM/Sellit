@@ -1,15 +1,15 @@
-package com.example.project1;
+package com.example.project1.data_classes;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class Property_model_class implements Parcelable {
-
+public class new_property_info {
     private String Phone_number;
     private String Adress;
     private String Price;
     private String Details;
     private String Offeredby;
+    private String Property_image;
+    private String property_ID;
+    private String property_ID_particular;
+    private String Lat;
 
     public String getLat() {
         return Lat;
@@ -27,17 +27,13 @@ public class Property_model_class implements Parcelable {
         Lng = lng;
     }
 
-    private String Property_image;
-    private String property_ID;
-    private String property_ID_particular;
-    private String Lat;
     private String Lng;
 
-    public Property_model_class(){
+    public new_property_info(){
 
     }
 
-    public Property_model_class(String phone_number, String adress, String price, String details, String offeredby, String property_image , String property_ID, String property_ID_particular, String lat, String lng) {
+    public new_property_info(String phone_number, String adress, String price, String details, String offeredby, String property_image, String property_ID, String property_ID_particular, String lat, String lng) {
         Phone_number = phone_number;
         Adress = adress;
         Price = price;
@@ -49,31 +45,6 @@ public class Property_model_class implements Parcelable {
         Lat = lat;
         Lng = lng;
     }
-
-    protected Property_model_class(Parcel in) {
-        Phone_number = in.readString();
-        Adress = in.readString();
-        Price = in.readString();
-        Details = in.readString();
-        Offeredby = in.readString();
-        Property_image = in.readString();
-        property_ID = in.readString();
-        property_ID_particular = in.readString();
-        Lat = in.readString();
-        Lng = in.readString();
-    }
-
-    public static final Creator<Property_model_class> CREATOR = new Creator<Property_model_class>() {
-        @Override
-        public Property_model_class createFromParcel(Parcel in) {
-            return new Property_model_class(in);
-        }
-
-        @Override
-        public Property_model_class[] newArray(int size) {
-            return new Property_model_class[size];
-        }
-    };
 
     public String getProperty_ID() {
         return property_ID;
@@ -90,6 +61,7 @@ public class Property_model_class implements Parcelable {
     public void setProperty_ID_particular(String property_ID_particular) {
         this.property_ID_particular = property_ID_particular;
     }
+
 
     public String getPhone_number() {
         return Phone_number;
@@ -139,22 +111,4 @@ public class Property_model_class implements Parcelable {
         Property_image = property_image;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(Phone_number);
-        parcel.writeString(Adress);
-        parcel.writeString(Price);
-        parcel.writeString(Details);
-        parcel.writeString(Offeredby);
-        parcel.writeString(Property_image);
-        parcel.writeString(property_ID);
-        parcel.writeString(property_ID_particular);
-        parcel.writeString(Lat);
-        parcel.writeString(Lng);
-    }
 }

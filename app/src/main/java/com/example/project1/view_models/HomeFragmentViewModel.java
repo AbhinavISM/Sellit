@@ -1,10 +1,11 @@
-package com.example.project1;
+package com.example.project1.view_models;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.project1.ListenerInterfaces.Homedataloadlistener;
+import com.example.project1.data_classes.Property_model_class;
 import com.example.project1.Repository.HomeFragmentRepository;
 
 import java.util.List;

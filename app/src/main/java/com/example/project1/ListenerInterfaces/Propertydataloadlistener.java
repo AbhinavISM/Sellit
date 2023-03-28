@@ -1,6 +1,6 @@
 package com.example.project1.ListenerInterfaces;
 
-import com.example.project1.Hetero_model_for_userprofile;
+import com.example.project1.data_classes.Hetero_model_for_userprofile;
 
 import java.util.List;
 

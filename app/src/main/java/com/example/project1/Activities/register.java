@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project1.R;
-import com.example.project1.registered_user_info;
+import com.example.project1.data_classes.registered_user_info;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -58,11 +58,6 @@ public class register extends AppCompatActivity {
                                             FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(newuser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
-//                                                    newuser.setEmail("");
-//                                                    newuser.setName("");
-//                                                    newuser.setPassword("");
-//                                                    startActivity(new Intent(register.this,recycler_activity.class));
-//                                                    finish();
                                                     if(task.isSuccessful()){
                                                         Toast.makeText(register.this, "succesfullyregsitered", Toast.LENGTH_LONG).show();
                                                         startActivity(new Intent(register.this, MainActivity.class));

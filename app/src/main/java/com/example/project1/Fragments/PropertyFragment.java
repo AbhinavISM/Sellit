@@ -24,15 +24,15 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project1.Hetero_model_for_userprofile;
+import com.example.project1.data_classes.Hetero_model_for_userprofile;
 import com.example.project1.ListenerInterfaces.MapInterface;
-import com.example.project1.PropertyFragmentViewModel;
+import com.example.project1.view_models.PropertyFragmentViewModel;
 import com.example.project1.R;
 import com.example.project1.ListenerInterfaces.add_profile_pic_interface;
 import com.example.project1.RecyclerAdapters.hetero_adapter_for_userprofile;
 import com.example.project1.Activities.login;
 import com.example.project1.RoomDb.myPropertyEntity;
-import com.example.project1.myPropertyViewModel;
+import com.example.project1.view_models.myPropertyViewModel;
 import com.example.project1.ListenerInterfaces.recyclerInterface;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
@@ -94,80 +94,6 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
                 }
             }
         });
-    }//
-
-    void init_hetero_fragment_data() {
-//        heteromodel = new ArrayList<>();
-//
-//        final String[] username = new String[1];
-//        final String[] useremail = new String[1];
-//        final String[] user_profile_link = new String[1];
-//        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                if(task.isSuccessful()){
-//                    username[0] = Objects.requireNonNull(task.getResult().getValue()).toString();
-//                    Log.d("name : ",String.valueOf(username[0]));
-//
-//                    // ab email nikal
-//                    FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("email").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                            if(task.isSuccessful()){
-//                                useremail[0] = Objects.requireNonNull(task.getResult().getValue(String.class));
-//                                Log.d("email : ",useremail[0]);
-//                                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profile_pic_link").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                                        if(task.isSuccessful()){
-//                                            user_profile_link[0] = task.getResult().getValue(String.class);
-//                                            if(user_profile_link[0]==null){
-//                                                user_profile_link[0] = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzsiq2kL7EYn1TofQ1k8lLzdZhN5eyWjINA&usqp=CAU";
-//                                            }
-//                                            FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("property added by this user").addValueEventListener(new ValueEventListener() {
-//                                                @Override
-//                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                                                    heteromodel.clear();
-//                                                    heteromodel.add(new Hetero_model_for_userprofile(user_profile_case,username[0],useremail[0],user_profile_link[0]));
-//                                                    for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-//                                                        Property_model_class property_model_data = dataSnapshot.getValue(Property_model_class.class);
-//                                                        heteromodel.add(new Hetero_model_for_userprofile(property_model_data.getPhone_number(),property_model_data.getAdress(),property_model_data.getPrice(),property_model_data.getDetails(),property_model_data.getOfferedby(),property_model_data.getProperty_image(),property_model_data.getProperty_ID(),property_model_data.getProperty_ID_particular()));
-//                                                    }
-//                                                    init_hetero_fragment_recycler();
-//                                                }
-//
-//                                                @Override
-//                                                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                                                }
-//                                            });
-//                                        }
-//                                    }
-//                                });
-//
-//                            }
-//                        }
-//                    });
-//                }
-//            }
-//        });
-
-//        int delay = 1000; // number of milliseconds to sleep
-//
-//        long start = System.currentTimeMillis();
-//        while(start >= System.currentTimeMillis() - delay){
-//
-//        }
-
-//        String dekh = username[0];
-//        Log.d("dekh ", String.valueOf(dekh));
-        //fetching current useremail for profile case(need to do only once)
-
-
-
-
-//        heteromodel.add(new Hetero_model_for_userprofile(user_profile_case,"naam","naam@naam.com","https://firebasestorage.googleapis.com/v0/b/project1-2d029.appspot.com/o/uploads%2F1660458189951.jpg?alt=media&token=46e81358-0a2f-4c51-a28d-9c60a40a2053"));
-//        heteromodel.add(new Hetero_model_for_userprofile("8456434648","bfgisuegy","93582","rhgsjegrs0","maine daala hain","https://firebasestorage.googleapis.com/v0/b/project1-2d029.appspot.com/o/uploads%2F1660458189951.jpg?alt=media&token=46e81358-0a2f-4c51-a28d-9c60a40a2053","NO_ID","NO_ID"));
     }
 
     void init_hetero_fragment_recycler(){
@@ -206,31 +132,8 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
 
     @Override
     public void onItemClick(int position) {
-        //UNCOMMENT THIS WHEN IN ACTIVITY MODE
-
-//        Toast.makeText(getContext(),"clicked",Toast.LENGTH_SHORT).show();
-//        Intent edit_prop_intent = new Intent(getActivity(),update_delete_activity.class);
-//        edit_prop_intent.putExtra("phone_number",heteromodel.get(position).getPhone_number());
-//        edit_prop_intent.putExtra("adress",heteromodel.get(position).getAdress());
-//        edit_prop_intent.putExtra("price",heteromodel.get(position).getPrice());
-//        edit_prop_intent.putExtra("details",heteromodel.get(position).getDetails());
-//        edit_prop_intent.putExtra("offeredby",heteromodel.get(position).getOfferedby());
-//        edit_prop_intent.putExtra("image",heteromodel.get(position).getProperty_image());
-//        edit_prop_intent.putExtra("property_ID",heteromodel.get(position).getProperty_ID());
-//        edit_prop_intent.putExtra("property_ID_particular",heteromodel.get(position).getProperty_ID_paticular());
-//        edit_prop_intent.putExtra("adapter_pos",position);
-//        startActivity(edit_prop_intent);
-
 
         propertyFragmentViewModel.setDataForPropertyFragmentToEditFragment(position);
-//        Property_model_class tosendforedit = new Property_model_class(propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getPhone_number(),
-//                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getAdress(),
-//                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getPrice(),
-//                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getDetails(),
-//                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getOfferedby(),
-//                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getProperty_image(),
-//                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getProperty_ID(),
-//                propertyFragmentViewModel.get_property_data_list_vm().getValue().get(position).getProperty_ID_paticular());
         NavDirections action = PropertyFragmentDirections.actionPropertyFragmentToEditFragment();
         navController.navigate(action);
     }
@@ -240,25 +143,6 @@ public class PropertyFragment extends Fragment implements add_profile_pic_interf
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==3&&data!=null){
             propertyFragmentViewModel.change_profile_pic(data.getData(),System.currentTimeMillis()+"."+getExtension(data.getData()));
-//            profile_image_uri = data.getData();
-//            ProfileImage.setImageURI(profile_image_uri);
-//            String image_name = System.currentTimeMillis()+"."+getExtension(profile_image_uri);
-//            FirebaseStorage.getInstance().getReference("profile_pics").child(image_name).putFile(profile_image_uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-//                    if(task.isSuccessful()){
-//                        FirebaseStorage.getInstance().getReference("profile_pics").child(image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                            @Override
-//                            public void onSuccess(Uri uri) {
-//                                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profile_pic_link").setValue(uri.toString());
-//                                Toast.makeText(getContext(), "succesfully changed", Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//                    }
-//                }
-//            });
-
-
         }
     }
 

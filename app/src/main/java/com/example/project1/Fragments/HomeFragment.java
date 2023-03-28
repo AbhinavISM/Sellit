@@ -19,8 +19,8 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project1.HomeFragmentViewModel;
-import com.example.project1.Property_model_class;
+import com.example.project1.view_models.HomeFragmentViewModel;
+import com.example.project1.data_classes.Property_model_class;
 import com.example.project1.R;
 import com.example.project1.RecyclerAdapters.property_adapter;
 import com.example.project1.ListenerInterfaces.recyclerInterface;
@@ -41,7 +41,6 @@ public class HomeFragment extends Fragment implements recyclerInterface {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -73,34 +72,10 @@ public class HomeFragment extends Fragment implements recyclerInterface {
         }
     }
 
-    private void init_home_data() {
-//        home_data_list = homeFragmentViewModel.get_home_data_list_vm().getValue();
-//        init_home_recycler();
-//        home_data_list = new ArrayList<>();
-//        FirebaseDatabase.getInstance().getReference("property added by all users").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                home_data_list.clear();
-//                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-//                    Property_model_class property_model_data = dataSnapshot.getValue(Property_model_class.class);
-//                    home_data_list.add(property_model_data);
-//
-//                }
-//                init_home_recycler();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-    }
-
     @Override
     public void onItemClick(int position) {
         Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
         List<Property_model_class> data = homeFragmentViewModel.get_home_data_list_vm().getValue();
-//        NavDirections action = HomeFragmentDirections.actionHomeFragmentToShowLocationFragment(data.get(position).getLat(),data.get(position).getLng());
         NavDirections action = HomeFragmentDirections.actionHomeFragmentToMapsFragment(data.get(position).getLat(),data.get(position).getLng(),"HomeFragment");
 
         navController.navigate(action);

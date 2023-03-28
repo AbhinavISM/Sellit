@@ -1,7 +1,7 @@
 package com.example.project1.RecyclerAdapters;
 
-import static com.example.project1.Hetero_model_for_userprofile.user_profile_case;
-import static com.example.project1.Hetero_model_for_userprofile.user_property_case;
+import static com.example.project1.data_classes.Hetero_model_for_userprofile.user_profile_case;
+import static com.example.project1.data_classes.Hetero_model_for_userprofile.user_property_case;
 
 import android.content.Context;
 import android.util.Log;
@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.project1.ListenerInterfaces.MapInterface;
 import com.example.project1.ListenerInterfaces.add_profile_pic_interface;
 import com.example.project1.ListenerInterfaces.recyclerInterface;
-import com.example.project1.Property_model_class;
+import com.example.project1.data_classes.Property_model_class;
 import com.example.project1.R;
 import com.example.project1.RoomDb.myPropertyEntity;
 import com.example.project1.databinding.PropertyLayoutBinding;
@@ -28,14 +28,12 @@ import java.util.List;
 public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
 //
     List<myPropertyEntity> hetero_entity_list;
-//    List<Hetero_model_for_userprofile> hetero_list;
     Context context;
     recyclerInterface recycler_interafce_for_profile;
     add_profile_pic_interface profile_pic_interface;
     MapInterface mapInterface;
     @Override
     public int getItemViewType(int position) {
-//        return hetero_list.get(position).getViewtype();
         if(hetero_entity_list == null){
             return user_property_case;
         }
@@ -45,7 +43,6 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
     }
 
     public hetero_adapter_for_userprofile(List<myPropertyEntity> hetero_entity_list, Context context, recyclerInterface reycler_interafce_for_profile, add_profile_pic_interface profile_pic_interface, MapInterface mapInterface) {
-//        this.hetero_list = hetero_list;
         this.hetero_entity_list = hetero_entity_list;
         this.context = context;
         this.recycler_interafce_for_profile = reycler_interafce_for_profile;
@@ -86,13 +83,6 @@ public class hetero_adapter_for_userprofile extends RecyclerView.Adapter{
                 ((user_profile_case_ViewHolder)holder).userProfileBinding.setProfileUsername(profile_username_fromfirebase_data);
                 break;
             case user_property_case:
-//                String adressdata = hetero_list.get(position).getAdress();
-//                String phnodata = hetero_list.get(position).getPhone_number();
-//                Log.d("phone no print kiya hain, dekh adress siiciiv mil rha hain kya",phnodata);
-//                String pricedata = hetero_list.get(position).getPrice();
-//                String detailsdata = hetero_list.get(position).getDetails();
-//                String offerdbydata = hetero_list.get(position).getOfferedby();
-//                String imagedata = hetero_list.get(position).getProperty_image();
 
                 String adressdata = hetero_entity_list.get(position).getAdress();
                 String phnodata = hetero_entity_list.get(position).getPhone_number();

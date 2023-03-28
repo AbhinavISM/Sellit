@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.view_models;
 
 import android.net.Uri;
 
@@ -6,8 +6,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.project1.data_classes.Hetero_model_for_userprofile;
 import com.example.project1.ListenerInterfaces.Propertydataloadlistener;
 import com.example.project1.ListenerInterfaces.SuccessListener;
+import com.example.project1.data_classes.Property_model_class;
 import com.example.project1.Repository.PropertyFragmentRepository;
 import com.google.firebase.auth.FirebaseAuth;
 

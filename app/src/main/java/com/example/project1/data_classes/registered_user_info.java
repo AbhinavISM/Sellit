@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.data_classes;
 
 public class registered_user_info {
     private String name;

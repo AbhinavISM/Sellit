@@ -6,10 +6,10 @@
     <data>
         <variable
             name="inflate_edit_fragment_data"
-            type="com.example.project1.Property_model_class" />
+            type="com.example.project1.data_classes.Property_model_class" />
         <variable
             name="viewmodel"
-            type="com.example.project1.PropertyFragmentViewModel" />
+            type="com.example.project1.view_models.PropertyFragmentViewModel" />
     </data>
 <ScrollView
     android:layout_width="match_parent"

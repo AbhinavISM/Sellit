@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.data_classes;
 
 public class Hetero_model_for_userprofile {
     public static final int user_profile_case = 1;

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="property_model_class_data"
-            type="com.example.project1.Property_model_class" />
+            type="com.example.project1.data_classes.Property_model_class" />
     </data>
 
     <androidx.cardview.widget.CardView

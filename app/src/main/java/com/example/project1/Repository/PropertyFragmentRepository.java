@@ -1,6 +1,6 @@
 package com.example.project1.Repository;
 
-import static com.example.project1.Hetero_model_for_userprofile.user_profile_case;
+import static com.example.project1.data_classes.Hetero_model_for_userprofile.user_profile_case;
 
 import android.net.Uri;
 import android.util.Log;
@@ -8,10 +8,10 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.project1.Hetero_model_for_userprofile;
-import com.example.project1.new_property_info;
+import com.example.project1.data_classes.Hetero_model_for_userprofile;
+import com.example.project1.data_classes.new_property_info;
 import com.example.project1.ListenerInterfaces.Propertydataloadlistener;
-import com.example.project1.Property_model_class;
+import com.example.project1.data_classes.Property_model_class;
 import com.example.project1.ListenerInterfaces.SuccessListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -279,14 +279,6 @@ public class PropertyFragmentRepository {
                                     Log.d("line 5", "success");
                                     if(task.isSuccessful()){
                                         Log.d("full success", "OOOOOO");
-//                                        Toast.makeText(getContext(), "succesfully uploaded", Toast.LENGTH_SHORT).show();
-                                        //the next line causes problem of showing whole outdated list once again along with whole updated list
-//                                                adapterofprop.notifyDataSetChanged();
-//                                        addimage.setImageResource(R.drawable.ic_baseline_add_a_photo_24);
-//                                        addadress.setText("");
-//                                        addphoneno.setText("");
-//                                        adddetails.setText("");
-//                                        addprice.setText("");
 
                                     }
                                     else{

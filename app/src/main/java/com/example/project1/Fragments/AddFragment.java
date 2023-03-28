@@ -20,9 +20,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
-import com.example.project1.PropertyFragmentViewModel;
+import com.example.project1.view_models.PropertyFragmentViewModel;
 import com.example.project1.R;
-import com.example.project1.myPropertyViewModel;
+import com.example.project1.view_models.myPropertyViewModel;
 
 
 public class AddFragment extends Fragment {

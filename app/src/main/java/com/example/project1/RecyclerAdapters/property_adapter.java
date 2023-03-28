@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project1.ListenerInterfaces.recyclerInterface;
-import com.example.project1.Property_model_class;
+import com.example.project1.data_classes.Property_model_class;
 import com.example.project1.databinding.PropertyLayoutBinding;
 
 import java.util.List;
@@ -33,13 +33,11 @@ public class property_adapter extends RecyclerView.Adapter<property_adapter.View
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         PropertyLayoutBinding propertyLayoutBinding = PropertyLayoutBinding.inflate(layoutInflater,parent,false);
         return new ViewHolder(propertyLayoutBinding);
-//        parent.getContext()
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-//        int imagedata = datalist.get(position).getProperty_image();
         String adressdata = datalist.get(position).getAdress();
         String phnodata = datalist.get(position).getPhone_number();
         Log.d("phone no print kiya hain, dekh adress siiciiv mil rha hain kya",phnodata);
@@ -69,7 +67,6 @@ public class property_adapter extends RecyclerView.Adapter<property_adapter.View
                 @Override
                 public void onClick(View view) {
                     recycler_Interface.onItemClick(getAdapterPosition());
-//                    Toast.makeText(context, String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
                 }
             });
 

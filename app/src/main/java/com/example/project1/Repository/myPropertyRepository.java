@@ -1,7 +1,7 @@
 package com.example.project1.Repository;
 
-import static com.example.project1.Hetero_model_for_userprofile.user_profile_case;
-import static com.example.project1.Hetero_model_for_userprofile.user_property_case;
+import static com.example.project1.data_classes.Hetero_model_for_userprofile.user_profile_case;
+import static com.example.project1.data_classes.Hetero_model_for_userprofile.user_property_case;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,7 +10,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
-import com.example.project1.Property_model_class;
+import com.example.project1.data_classes.Property_model_class;
 import com.example.project1.RoomDb.myPropertyEntity;
 import com.example.project1.RoomDb.myPropertydao;
 import com.example.project1.RoomDb.myPropertydb;
@@ -34,13 +34,6 @@ public class myPropertyRepository {
     private static myPropertydao mypropertydao;
     private static LiveData<List<myPropertyEntity>> offline_property_list_repo;
     private static myPropertyRepository instance;
-
-//    public myPropertyRepository(Context context){
-//        myPropertydb mypropertydb = myPropertydb.getInstance(context);
-//        mypropertydao = mypropertydb.my_property_dao();
-//        offline_property_list_repo = mypropertydao.getAllmyProperty();
-//    }
-
     public static myPropertyRepository init(Context application){
         // cant we just use a static block here?
         if(instance == null){
@@ -68,7 +61,6 @@ public class myPropertyRepository {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                 if(task.isSuccessful()){
-                    // TRYING TO GET URL IN COMMENTED CODE BUT IT INVOKES ON FALIURE LISTENER
                     FirebaseStorage.getInstance().getReference("uploads").child(image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
@@ -125,7 +117,7 @@ public class myPropertyRepository {
                                                 user_profile_link[0] = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmzsiq2kL7EYn1TofQ1k8lLzdZhN5eyWjINA&usqp=CAU";
                                             }
                                             insert_profile_since_room_khali_tha(username[0],useremail[0],user_profile_link[0]);
-                                            FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("property added by this user").addValueEventListener(new ValueEventListener() {
+                                            FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("property added by this user").addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                                                    property_data_list_repo.clear();

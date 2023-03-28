@@ -1,23 +1,15 @@
-package com.example.project1;
+package com.example.project1.data_classes;
 
-public class new_property_info {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-//    private String name;
-//    private String adress;
-//    private String phoneno;
-//    private String details;
-//    private String price;
-//    private String image_uri;
+public class Property_model_class implements Parcelable {
 
     private String Phone_number;
     private String Adress;
     private String Price;
     private String Details;
     private String Offeredby;
-    private String Property_image;
-    private String property_ID;
-    private String property_ID_particular;
-    private String Lat;
 
     public String getLat() {
         return Lat;
@@ -35,13 +27,17 @@ public class new_property_info {
         Lng = lng;
     }
 
+    private String Property_image;
+    private String property_ID;
+    private String property_ID_particular;
+    private String Lat;
     private String Lng;
 
-    public new_property_info(){
+    public Property_model_class(){
 
     }
 
-    public new_property_info(String phone_number, String adress, String price, String details, String offeredby, String property_image, String property_ID, String property_ID_particular, String lat, String lng) {
+    public Property_model_class(String phone_number, String adress, String price, String details, String offeredby, String property_image , String property_ID, String property_ID_particular, String lat, String lng) {
         Phone_number = phone_number;
         Adress = adress;
         Price = price;
@@ -53,6 +49,31 @@ public class new_property_info {
         Lat = lat;
         Lng = lng;
     }
+
+    protected Property_model_class(Parcel in) {
+        Phone_number = in.readString();
+        Adress = in.readString();
+        Price = in.readString();
+        Details = in.readString();
+        Offeredby = in.readString();
+        Property_image = in.readString();
+        property_ID = in.readString();
+        property_ID_particular = in.readString();
+        Lat = in.readString();
+        Lng = in.readString();
+    }
+
+    public static final Creator<Property_model_class> CREATOR = new Creator<Property_model_class>() {
+        @Override
+        public Property_model_class createFromParcel(Parcel in) {
+            return new Property_model_class(in);
+        }
+
+        @Override
+        public Property_model_class[] newArray(int size) {
+            return new Property_model_class[size];
+        }
+    };
 
     public String getProperty_ID() {
         return property_ID;
@@ -69,7 +90,6 @@ public class new_property_info {
     public void setProperty_ID_particular(String property_ID_particular) {
         this.property_ID_particular = property_ID_particular;
     }
-
 
     public String getPhone_number() {
         return Phone_number;
@@ -119,63 +139,22 @@ public class new_property_info {
         Property_image = property_image;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-
-//    public new_property_info(String phoneno, String adress, String price, String details, String name, String image_uri){
-//        this.name = name;
-//        this.adress = adress;
-//        this.phoneno = phoneno;
-//        this.details = details;
-//        this.price = price;
-//        this.image_uri = image_uri;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public String getAdress() {
-//        return adress;
-//    }
-//
-//    public void setAdress(String adress) {
-//        this.adress = adress;
-//    }
-//
-//    public String getPhoneno() {
-//        return phoneno;
-//    }
-//
-//    public void setPhoneno(String phoneno) {
-//        this.phoneno = phoneno;
-//    }
-//
-//    public String getDetails() {
-//        return details;
-//    }
-//
-//    public void setDetails(String details) {
-//        this.details = details;
-//    }
-//
-//    public String getPrice() {
-//        return price;
-//    }
-//
-//    public void setPrice(String price) {
-//        this.price = price;
-//    }
-//
-//    public String getImage_uri() {
-//        return image_uri;
-//    }
-//
-//    public void setImage_uri(String image_uri) {
-//        this.image_uri = image_uri;
-//    }
-
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(Phone_number);
+        parcel.writeString(Adress);
+        parcel.writeString(Price);
+        parcel.writeString(Details);
+        parcel.writeString(Offeredby);
+        parcel.writeString(Property_image);
+        parcel.writeString(property_ID);
+        parcel.writeString(property_ID_particular);
+        parcel.writeString(Lat);
+        parcel.writeString(Lng);
+    }
 }
